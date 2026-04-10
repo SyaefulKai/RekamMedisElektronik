@@ -24,7 +24,7 @@ class PermissionSeeder extends Seeder
                 'delete'
             ],
             'medical-record' => [
-                'read',
+                'view',
                 'create',
                 'update',
                 'delete'

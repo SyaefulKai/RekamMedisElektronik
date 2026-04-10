@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-vue-next';
 
 export interface Auth {
     user: User;
+    roles: string[]
 }
 
 export interface BreadcrumbItem {
@@ -17,6 +18,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    [key: string]: unknown
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
@@ -38,5 +40,17 @@ export interface User {
     created_at: string;
     updated_at: string;
 }
+
+export type Role = {
+    id: number,
+    name: string,
+    permissions: Permission[]
+}
+
+export type Permission = {
+    id: number,
+    name: string
+}
+
 
 export type BreadcrumbItemType = BreadcrumbItem;

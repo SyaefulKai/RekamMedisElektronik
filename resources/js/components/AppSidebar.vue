@@ -5,9 +5,10 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, PersonStanding } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, User, Shield } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import NavAuthorization from './NavAuthorization.vue';
+import { index } from '@/routes/user';
 
 const mainNavItems: NavItem[] = [
     {
@@ -19,9 +20,14 @@ const mainNavItems: NavItem[] = [
 
 const authorization: NavItem[] = [
     {
+        title:'Pengguna',
+        href: index().url,
+        icon: User,
+    },
+    {
         title: 'Role',
         href: '/roles',
-        icon: PersonStanding
+        icon: Shield
     },
 ]
 

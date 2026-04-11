@@ -24,8 +24,10 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
+        $role->load('permissions');
+
         return Inertia::render('authorization/roles/Edit', [
-            'role' => $role->with('permissions')->first()
+            'role' => $role,
         ]);
     }
 
@@ -44,6 +46,12 @@ class RoleController extends Controller
         $data = collect($request->validated());
         $role = Role::findById($data['role']);
         $role->syncPermissions($data['permissions']);
+        return redirect()->back();
+    }
+
+    public function delete(Role $role)
+    {
+        $role->delete();
         return redirect()->back();
     }
 }

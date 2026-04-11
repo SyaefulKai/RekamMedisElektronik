@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Item, ItemContent, ItemDescription, ItemGroup, ItemSeparator } from '@/components/ui/item';
+import ItemActions from '@/components/ui/item/ItemActions.vue';
 import { dashboardPermisions, medicalRecordPermissions, registrationPermissions } from '@/constant/permission';
 import { Permission } from '@/types';
 import { computed, ref } from 'vue';
@@ -10,18 +11,15 @@ const props = defineProps<{
 }>();
 
 const permissionNames = computed(() => {
-    return props.permissions.map((permission) => permission.name)
-})
-const selectedPermissions = ref<string[]>([
-    ...permissionNames.value
-]);
+    return props.permissions.map((permission) => permission.name);
+});
+const selectedPermissions = ref<string[]>([...permissionNames.value]);
 
 const permissionList = {
     'Rekam Medis': medicalRecordPermissions,
     Antrian: registrationPermissions,
     Dashboard: dashboardPermisions,
 };
-
 
 const onCheck = (key: string) => {
     if (selectedPermissions.value.includes(key)) {
@@ -36,21 +34,21 @@ const onCheck = (key: string) => {
 const emit = defineEmits<{
     (e: 'checked', value: string[]): void;
 }>();
-
 </script>
 
 <template>
-    <Card v-for="[name, permissions] in Object.entries(permissionList)" :key="name" class="m-4">
-        <CardHeader>
-            <CardTitle>
-                {{ name }}
-            </CardTitle>
-        </CardHeader>
-        <CardContent>
-            <div v-for="[permission, label] in Object.entries(permissions)" :key="permission" class="flex items-center gap-2 py-2">
+    <ItemGroup v-for="[name, permissions] in Object.entries(permissionList)" :key="name" class="rounded border p-4">
+        {{ name }}
+        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission">
+            <ItemContent>
+                <ItemDescription>
+                    {{ label }}
+                </ItemDescription>
+            </ItemContent>
+            <ItemActions>
                 <Checkbox :default-checked="permissionNames.includes(permission)" :value="permission" @update:checked="() => onCheck(permission)" />
-                {{ label }}
-            </div>
-        </CardContent>
-    </Card>
+            </ItemActions>
+            <ItemSeparator v-if="Object.entries(permissions).length > 1"/>
+        </Item>
+    </ItemGroup>
 </template>

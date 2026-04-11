@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::index
- * @see app/Http/Controllers/Authorization/RoleController.php:12
+ * @see app/Http/Controllers/Authorization/RoleController.php:13
  * @route '/roles'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::index
- * @see app/Http/Controllers/Authorization/RoleController.php:12
+ * @see app/Http/Controllers/Authorization/RoleController.php:13
  * @route '/roles'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::index
- * @see app/Http/Controllers/Authorization/RoleController.php:12
+ * @see app/Http/Controllers/Authorization/RoleController.php:13
  * @route '/roles'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::index
- * @see app/Http/Controllers/Authorization/RoleController.php:12
+ * @see app/Http/Controllers/Authorization/RoleController.php:13
  * @route '/roles'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::create
- * @see app/Http/Controllers/Authorization/RoleController.php:19
+ * @see app/Http/Controllers/Authorization/RoleController.php:20
  * @route '/roles/create'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,7 +59,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::create
- * @see app/Http/Controllers/Authorization/RoleController.php:19
+ * @see app/Http/Controllers/Authorization/RoleController.php:20
  * @route '/roles/create'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -68,7 +68,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::create
- * @see app/Http/Controllers/Authorization/RoleController.php:19
+ * @see app/Http/Controllers/Authorization/RoleController.php:20
  * @route '/roles/create'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -77,7 +77,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::create
- * @see app/Http/Controllers/Authorization/RoleController.php:19
+ * @see app/Http/Controllers/Authorization/RoleController.php:20
  * @route '/roles/create'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -86,8 +86,42 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \App\Http\Controllers\Authorization\RoleController::store
+ * @see app/Http/Controllers/Authorization/RoleController.php:32
+ * @route '/roles'
+ */
+export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+store.definition = {
+    methods: ["post"],
+    url: '/roles',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\Authorization\RoleController::store
+ * @see app/Http/Controllers/Authorization/RoleController.php:32
+ * @route '/roles'
+ */
+store.url = (options?: RouteQueryOptions) => {
+    return store.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Authorization\RoleController::store
+ * @see app/Http/Controllers/Authorization/RoleController.php:32
+ * @route '/roles'
+ */
+store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+/**
 * @see \App\Http\Controllers\Authorization\RoleController::edit
- * @see app/Http/Controllers/Authorization/RoleController.php:24
+ * @see app/Http/Controllers/Authorization/RoleController.php:25
  * @route '/roles/{role}'
  */
 export const edit = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -102,7 +136,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::edit
- * @see app/Http/Controllers/Authorization/RoleController.php:24
+ * @see app/Http/Controllers/Authorization/RoleController.php:25
  * @route '/roles/{role}'
  */
 edit.url = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -135,7 +169,7 @@ edit.url = (args: { role: number | { id: number } } | [role: number | { id: numb
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::edit
- * @see app/Http/Controllers/Authorization/RoleController.php:24
+ * @see app/Http/Controllers/Authorization/RoleController.php:25
  * @route '/roles/{role}'
  */
 edit.get = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -144,7 +178,7 @@ edit.get = (args: { role: number | { id: number } } | [role: number | { id: numb
 })
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::edit
- * @see app/Http/Controllers/Authorization/RoleController.php:24
+ * @see app/Http/Controllers/Authorization/RoleController.php:25
  * @route '/roles/{role}'
  */
 edit.head = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -154,7 +188,7 @@ edit.head = (args: { role: number | { id: number } } | [role: number | { id: num
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::update
- * @see app/Http/Controllers/Authorization/RoleController.php:31
+ * @see app/Http/Controllers/Authorization/RoleController.php:42
  * @route '/roles/{role}'
  */
 export const update = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -169,7 +203,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::update
- * @see app/Http/Controllers/Authorization/RoleController.php:31
+ * @see app/Http/Controllers/Authorization/RoleController.php:42
  * @route '/roles/{role}'
  */
 update.url = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -197,13 +231,13 @@ update.url = (args: { role: string | number } | [role: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::update
- * @see app/Http/Controllers/Authorization/RoleController.php:31
+ * @see app/Http/Controllers/Authorization/RoleController.php:42
  * @route '/roles/{role}'
  */
 update.patch = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: update.url(args, options),
     method: 'patch',
 })
-const RoleController = { index, create, edit, update }
+const RoleController = { index, create, store, edit, update }
 
 export default RoleController

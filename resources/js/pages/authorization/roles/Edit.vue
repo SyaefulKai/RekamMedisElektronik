@@ -36,7 +36,7 @@ defineProps<{
                 :permissions="permissions"
                 :role="role"/>
             </div>
-            <div class="flex flex-col md:grid md:grid-cols-3">
+            <div class="flex flex-col md:grid md:grid-cols-3 gap-4">
                 <PermissionList
                 :permissions="role.permissions"
                 @checked="(val) => permissions = val"/>

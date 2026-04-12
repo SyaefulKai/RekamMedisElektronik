@@ -23,7 +23,7 @@ const form = useForm({
     initialValues: {
         name: props.user.name,
         email: props.user.email,
-        role: props.user.roles[0].id
+        role: props.user?.roles[0]?.id
     },
 })
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -20,9 +21,11 @@ class RoleSeeder extends Seeder
         ]);
 
         $roles->each(function($role) {
-            Role::create([
+            Role::firstOrCreate([
                 'name' => $role
             ]);
         });
+
+        Role::where('name', 'Admin')->first()->syncPermissions(Permission::all());
     }
 }

@@ -5,7 +5,7 @@ import { BreadcrumbItem, Role } from '@/types';
 import CreateUserForm from './components/CreateUserForm.vue';
 import { z } from 'zod';
 import { CreateUserSchema } from '@/schemas/user';
-import { router } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -28,6 +28,7 @@ const handleSubmit = (data: z.infer<typeof CreateUserSchema>) => {
 </script>
 
 <template>
+    <Head title="Tambah Pengguna"/>
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-8">
             <CreateUserForm :roles="roles" @submit="handleSubmit"/>

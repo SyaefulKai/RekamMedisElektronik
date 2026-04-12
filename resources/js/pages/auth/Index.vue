@@ -7,6 +7,7 @@ import { BreadcrumbItem, Pagination, User } from '@/types';
 import { ref } from 'vue';
 import { UserColumn } from './columns/user-column';
 import CreateUserButton from './components/CreateUserButton.vue';
+import { Head } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -23,6 +24,7 @@ const loading = ref(false);
 </script>
 
 <template>
+    <Head title="Pengguna" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-col p-4 gap-4">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">

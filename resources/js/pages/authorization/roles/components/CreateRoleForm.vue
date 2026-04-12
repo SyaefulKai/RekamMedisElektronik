@@ -36,7 +36,7 @@ const submit = form.handleSubmit((data: CreateRoleRequest) => {
             <form id="role" @submit="submit" class="m-8 flex flex-col gap-4">
                 <VeeField v-slot="{ field, errors }" name="name">
                     <Field>
-                        <FieldLabel>Nama Role</FieldLabel>
+                        <FieldLabel>Nama Peran</FieldLabel>
                         <FieldContent>
                             <Input v-bind="field" autocomplete="off" :aria-invalid="!!errors.length" />
                         </FieldContent>
@@ -52,7 +52,7 @@ const submit = form.handleSubmit((data: CreateRoleRequest) => {
                 </VeeField>
                 <VeeField name="permissions" v-slot="{ errors }">
                     <Field>
-                        <FieldLabel>Izin Role</FieldLabel>
+                        <FieldLabel>Izin Peran</FieldLabel>
                         <FieldContent>
                             <div class="flex flex-col gap-4 md:grid md:grid-cols-3">
                                 <PermissionList :permissions="[]" @checked="(val) => form.setFieldValue('permissions', val)" />

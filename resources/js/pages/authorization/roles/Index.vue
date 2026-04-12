@@ -8,7 +8,7 @@ import CreateRoleButton from './components/CreateRoleButton.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Role',
+        title: 'Peran',
         href: index().url,
     },
 ];
@@ -21,11 +21,11 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Role" />
+    <Head title="Peran" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-col gap-4 p-8">
             <div class="flex flex-col justify-between gap-4 md:flex-row">
-                <h1 class="scroll-m-20 text-balance text-4xl font-extrabold tracking-tight">Daftar Role</h1>
+                <h1 class="scroll-m-20 text-balance text-4xl font-extrabold tracking-tight">Daftar Peran</h1>
                 <CreateRoleButton v-if="page.props.auth.permissions.includes('create.role')"/>
             </div>
             <div class="flex flex-col gap-4 md:grid md:grid-cols-4">

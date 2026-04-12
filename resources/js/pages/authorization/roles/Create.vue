@@ -8,11 +8,11 @@ import { CreateRoleRequest } from '@/types/authorization/role';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Role',
+        title: 'Peran',
         href: index().url,
     },
     {
-        title: 'Tambah Role',
+        title: 'Tambah Peran',
         href: create().url,
     },
 ];

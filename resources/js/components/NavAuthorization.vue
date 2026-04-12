@@ -1,59 +1,50 @@
 <script setup lang="ts">
 import { NavItem, SharedData } from '@/types';
+import { PermissionKey } from '@/types/authorization/permission';
 import { Link, usePage } from '@inertiajs/vue3';
-import { ChevronRight } from 'lucide-vue-next';
+import { ChevronRight, Shield } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
-import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from './ui/sidebar';
-import { PermissionKey } from '@/types/authorization/permission';
-import { Separator } from '@/components/ui/separator';
+import { SidebarGroup, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem } from './ui/sidebar';
 
 const page = usePage<SharedData>();
-const props = defineProps<{
+defineProps<{
     items: NavItem[];
 }>();
-const open = ref(props.items.find(item => item.href == page.url) != undefined);
+const open = ref(true);
 
-const requiredPermissions = new Set<PermissionKey>([
-    'view.role',
-    'create.role'
-])
+const requiredPermissions = new Set<PermissionKey>(['view.role', 'create.role']);
 
 const visible = page.props.auth.permissions.some((permission) => {
     return requiredPermissions.has(permission);
-})
+});
 </script>
 
 <template>
-    <SidebarGroup as-child class="border" v-if="visible">
-        <Collapsible :default-open="open" class="group/collapsible">
-            <SidebarGroupLabel as-child>
-                <CollapsibleTrigger
-                    class="group/label w-full text-left text-sm text-sidebar-foreground hover:text-sidebar-accent-foreground [&[data-state=open]>svg]:rotate-90"
-                    :class="{
-                        'hover:bg-sidebar-accent': !open,
-                        'hover:none': open,
-                    }"
-                >
-                    Peran dan Izin
-                    <ChevronRight class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-                <SidebarGroupContent>
-                    <SidebarMenu>
-                        <SidebarMenuItem v-for="(item, index) in items" :key="item.title">
-                            <SidebarMenuButton as-child :is-active="item.href === page.url" v-if="item.permission && page.props.auth.permissions.includes(item.permission)">
-                                <Link :href="item.href">
-                                    <component :is="item.icon" />
-                                    <span>{{ item.title }}</span>
-                                </Link>
-                            </SidebarMenuButton>
-                            <Separator v-if="index < items.length - 1"/>
-                        </SidebarMenuItem>
-                    </SidebarMenu>
-                </SidebarGroupContent>
-            </CollapsibleContent>
-        </Collapsible>
+    <SidebarGroup v-if="visible">
+        <SidebarMenu>
+            <Collapsible :default-open="open" as-child class="group/collapsible">
+                <SidebarMenuItem>
+                    <CollapsibleTrigger as-child>
+                        <SidebarMenuButton tooltip="Manajemen Peran">
+                            <Shield />
+                            <span>Manajemen Peran</span>
+                            <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        </SidebarMenuButton>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                        <SidebarMenuSub>
+                            <SidebarMenuSubItem v-for="item in items" :key="item.title">
+                                <SidebarMenuSubButton as-child>
+                                    <Link :href="item.href">
+                                        <span>{{ item.title }}</span>
+                                    </Link>
+                                </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                        </SidebarMenuSub>
+                    </CollapsibleContent>
+                </SidebarMenuItem>
+            </Collapsible>
+        </SidebarMenu>
     </SidebarGroup>
 </template>

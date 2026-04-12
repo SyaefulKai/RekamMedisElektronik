@@ -78,7 +78,7 @@ const footerNavItems: NavItem[] = [
             </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent class="p-4 md:p-0 lg:p-0">
             <NavMain :items="mainNavItems" />
             <NavAuthorization :items="authorization" />
             <NavUserManagement :items="userManagement" />

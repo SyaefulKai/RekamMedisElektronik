@@ -11,11 +11,11 @@ const page = usePage();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Role',
+        title: 'Peran',
         href: index().url,
     },
     {
-        title: 'Edit Role',
+        title: 'Edit Peran',
         href: page.url,
     },
 ];

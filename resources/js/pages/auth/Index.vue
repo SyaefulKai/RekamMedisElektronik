@@ -26,7 +26,7 @@ const loading = ref(false);
 <template>
     <Head title="Pengguna" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-col p-4 gap-4">
+        <div class="flex flex-col p-8 gap-4">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                 <h1 class="scroll-m-20 text-balance text-4xl font-extrabold tracking-tight">Daftar Pengguna</h1>
                 <CreateUserButton />

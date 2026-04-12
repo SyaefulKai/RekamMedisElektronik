@@ -31,7 +31,7 @@ const submit = form.handleSubmit((data: CreateRoleRequest) => {
 </script>
 
 <template>
-    <div>
+    <div class="flex flex-col">
         <div>
             <form id="role" @submit="submit" class="m-8 flex flex-col gap-4">
                 <VeeField v-slot="{ field, errors }" name="name">
@@ -70,7 +70,7 @@ const submit = form.handleSubmit((data: CreateRoleRequest) => {
                 </VeeField>
             </form>
         </div>
-        <div class="m-8">
+        <div class="grid mx-8 pb-8 md:flex md:justify-end md:pb-4 md:mx-8">
             <Button type="submit" form="role">Buat</Button>
         </div>
     </div>

@@ -16,15 +16,15 @@ import {
 } from '@/components/ui/table'
 import { Pagination } from '@/types';
 import { router } from '@inertiajs/vue3';
+import DataTablePagination from '@/components/ui/datatable/DataTablePagination.vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   pagination: Pagination<TData>
 }>()
 
-const emit = defineEmits<{
-    (e: 'loading', val: boolean): void
-}>()
+const loading = ref(false)
 
 const table = useVueTable({
   get data() {
@@ -51,8 +51,8 @@ const table = useVueTable({
     router.get(props.pagination.path, {
         page: next.pageIndex + 1,
     }, {
-        onStart: () => emit('loading', true),
-        onFinish: () => emit('loading', false)
+        onStart: () => loading.value = true,
+        onFinish: () => loading.value = false
     })
   }
 })
@@ -93,6 +93,6 @@ const table = useVueTable({
     </Table>
 </div>
 <div class="mt-4">
-    <slot name="pagination" :table="table"></slot>
+    <DataTablePagination :table="table" :loading="loading"/>
 </div>
 </template>

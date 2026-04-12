@@ -3,7 +3,7 @@ import { deleteMethod, edit } from '@/actions/App/Http/Controllers/Auth/UserCont
 import DataTable from '@/components/ui/datatable/DataTable.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index } from '@/routes/user';
-import { BreadcrumbItem, Pagination, User } from '@/types';
+import { BreadcrumbItem, Pagination, Role, User } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
 import { UserColumn } from './columns/user-column';
 import CreateUserButton from './components/CreateUserButton.vue';
@@ -16,7 +16,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 defineProps<{
-    users: Pagination<User>;
+    users: Pagination<User & {
+        roles: Role[]
+    }>;
 }>();
 
 const deleteUser = (user: User) => {

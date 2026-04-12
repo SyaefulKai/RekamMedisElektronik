@@ -18,9 +18,8 @@ const requiredPermissions = new Set<PermissionKey>([
     'create.role'
 ])
 
-const visible = props.items.some((item) => {
-    if(item.permission == undefined) return false;
-    return requiredPermissions.has(item.permission);
+const visible = page.props.auth.permissions.some((permission) => {
+    return requiredPermissions.has(permission);
 })
 </script>
 

@@ -42,4 +42,11 @@ class UserController extends Controller
         $user->assignRole($role);
         return redirect()->to(route('user.index'));
     }
+
+    public function delete(User $user)
+    {
+        $this->authorize('delete', $user);
+        $user->delete();
+        return redirect()->back();
+    }
 }

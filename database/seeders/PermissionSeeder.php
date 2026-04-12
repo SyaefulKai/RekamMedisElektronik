@@ -20,6 +20,7 @@ class PermissionSeeder extends Seeder
             'medical-record' => ['view', 'create', 'update', 'delete'],
             'user' => ['view', 'create', 'update', 'delete'],
             'role' => ['view', 'create', 'update', 'delete'],
+            'patient' => ['view', 'create', 'update', 'delete']
         ]);
 
         $data = [];

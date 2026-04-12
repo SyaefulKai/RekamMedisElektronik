@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Models\Resources;
+
+use App\Observers\PatientObserver;
+use Carbon\Carbon;
+use Database\Factories\PatientFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+#[ObservedBy(PatientObserver::class)]
+#[UseFactory(PatientFactory::class)]
+class Patient extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'nik',
+        'name',
+        'birth_date',
+        'address'
+    ];
+
+    protected $hidden = [
+        'nik',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected function birthDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Carbon::parse($value)->format('d M Y'),
+            set: fn($value) => Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d'),
+        );
+    }
+}

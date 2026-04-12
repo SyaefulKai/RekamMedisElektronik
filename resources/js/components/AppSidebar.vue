@@ -7,10 +7,12 @@ import { index as UserIndex, create as UserCreate } from '@/routes/user';
 import { index as RoleIndex, create as RoleCreate } from '@/actions/App/Http/Controllers/Authorization/RoleController';
 import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Shield, ShieldPlus, User, UserPlus } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, PersonStanding, Shield, ShieldPlus, User, UserPlus } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import NavAuthorization from './NavAuthorization.vue';
 import NavUserManagement from './NavUserManagement.vue';
+import { index as PatientIndex } from '@/actions/App/Http/Controllers/Resources/PatientController';
+import NavPatientManagement from '@/components/NavPatientManagement.vue';
 
 const mainNavItems: NavItem[] = [
     {
@@ -24,13 +26,11 @@ const authorization: NavItem[] = [
     {
         title: 'Peran',
         href: RoleIndex().url,
-        icon: Shield,
         permission: "view.role",
     },
     {
         title: 'Tambah Peran',
         href: RoleCreate().url,
-        icon: ShieldPlus,
         permission: 'create.role',
     }
 ];
@@ -39,16 +39,22 @@ const userManagement: NavItem[] = [
     {
         title: 'Pengguna',
         href: UserIndex().url,
-        icon: User,
         permission: 'view.user',
     },
     {
         title: 'Tambah Pengguna',
         href: UserCreate().url,
-        icon: UserPlus,
         permission: 'create.user'
     }
 ];
+
+const patientManagement: NavItem[] = [
+    {
+        title: 'Pasien',
+        href: PatientIndex().url,
+        permission: 'view.patient'
+    }
+]
 
 const footerNavItems: NavItem[] = [
     {
@@ -80,6 +86,7 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent class="p-4 md:p-0 lg:p-0">
             <NavMain :items="mainNavItems" />
+            <NavPatientManagement :items="patientManagement"/>
             <NavAuthorization :items="authorization" />
             <NavUserManagement :items="userManagement" />
         </SidebarContent>

@@ -3,12 +3,14 @@ import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { index as UserIndex } from '@/routes/user';
+import { index as RoleIndex, create as RoleCreate } from '@/actions/App/Http/Controllers/Authorization/RoleController';
 import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, User, Shield } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Shield, ShieldPlus, User } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import NavAuthorization from './NavAuthorization.vue';
-import { index } from '@/routes/user';
+import NavUserManagement from './NavUserManagement.vue';
 
 const mainNavItems: NavItem[] = [
     {
@@ -20,16 +22,27 @@ const mainNavItems: NavItem[] = [
 
 const authorization: NavItem[] = [
     {
-        title:'Pengguna',
-        href: index().url,
-        icon: User,
+        title: 'Peran',
+        href: RoleIndex().url,
+        icon: Shield,
+        permission: "view.role",
     },
     {
-        title: 'Role',
-        href: '/roles',
-        icon: Shield
+        title: 'Tambah Peran',
+        href: RoleCreate().url,
+        icon: ShieldPlus,
+        permission: 'create.role',
+    }
+];
+
+const userManagement: NavItem[] = [
+    {
+        title: 'Pengguna',
+        href: UserIndex().url,
+        icon: User,
+        permission: 'view.user',
     },
-]
+];
 
 const footerNavItems: NavItem[] = [
     {
@@ -62,6 +75,7 @@ const footerNavItems: NavItem[] = [
         <SidebarContent>
             <NavMain :items="mainNavItems" />
             <NavAuthorization :items="authorization" />
+            <NavUserManagement :items="userManagement" />
         </SidebarContent>
 
         <SidebarFooter>

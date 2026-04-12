@@ -2,9 +2,10 @@
 import { deleteMethod, edit } from '@/actions/App/Http/Controllers/Authorization/RoleController';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Role } from '@/types';
-import { Link } from '@inertiajs/vue3';
+import { Role, SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/vue3';
 
+const page = usePage<SharedData>()
 defineProps<{
     roles: Role[];
 }>();
@@ -17,7 +18,7 @@ defineProps<{
         </CardHeader>
         <CardContent> {{ role.permissions.length }} izin </CardContent>
         <CardFooter class="flex justify-end gap-2">
-            <Button variant="destructive" as-child>
+            <Button variant="destructive" as-child v-if="page.props.auth.permissions.includes('delete.role')">
                 <Link
                     :href="
                         deleteMethod({
@@ -29,7 +30,7 @@ defineProps<{
                     Hapus
                 </Link>
             </Button>
-            <Button variant="secondary" as-child>
+            <Button variant="secondary" as-child v-if="page.props.auth.permissions.includes('update.role')">
                 <Link :href="edit({
                     role: role.id
                 })"> Edit </Link>

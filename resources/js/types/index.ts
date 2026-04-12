@@ -1,8 +1,9 @@
 import type { LucideIcon } from 'lucide-vue-next';
+import { PermissionKey } from './authorization/permission';
 
 export interface Auth {
     user: User;
-    roles: string[]
+    permissions: string[]
 }
 
 export interface BreadcrumbItem {
@@ -15,6 +16,7 @@ export interface NavItem {
     href: string;
     icon?: LucideIcon;
     isActive?: boolean;
+    permission?: PermissionKey,
 }
 
 export interface SharedData {

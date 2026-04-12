@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Item, ItemContent, ItemGroup, ItemTitle } from '@/components/ui/item';
 import ItemActions from '@/components/ui/item/ItemActions.vue';
 import { Label } from '@/Components/ui/label';
-import { dashboardPermisions, medicalRecordPermissions, registrationPermissions } from '@/constant/permission';
+import { dashboardPermisions, medicalRecordPermissions, registrationPermissions, rolePermissions, userPermissions } from '@/constant/permission';
 import { Permission } from '@/types';
 import { computed, ref } from 'vue';
 
@@ -20,6 +20,8 @@ const permissionList = {
     'Rekam Medis': medicalRecordPermissions,
     Antrian: registrationPermissions,
     Dashboard: dashboardPermisions,
+    'Manajemen User': userPermissions,
+    'Manajemen Peran': rolePermissions
 };
 
 const onCheck = (key: string) => {

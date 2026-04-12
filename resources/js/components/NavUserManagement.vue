@@ -5,27 +5,18 @@ import { ChevronRight } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from './ui/sidebar';
-import { PermissionKey } from '@/types/authorization/permission';
 
 const page = usePage<SharedData>();
+
 const props = defineProps<{
     items: NavItem[];
 }>();
+
 const open = ref(props.items.find(item => item.href == page.url) != undefined);
-
-const requiredPermissions = new Set<PermissionKey>([
-    'view.role',
-    'create.role'
-])
-
-const visible = props.items.some((item) => {
-    if(item.permission == undefined) return false;
-    return requiredPermissions.has(item.permission);
-})
 </script>
 
 <template>
-    <SidebarGroup as-child class="border" v-if="visible">
+    <SidebarGroup as-child class="border">
         <Collapsible :default-open="open" class="group/collapsible">
             <SidebarGroupLabel as-child>
                 <CollapsibleTrigger
@@ -35,7 +26,7 @@ const visible = props.items.some((item) => {
                         'hover:none': open,
                     }"
                 >
-                    Peran dan Izin
+                    Manajemen User
                     <ChevronRight class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
                 </CollapsibleTrigger>
             </SidebarGroupLabel>
@@ -43,7 +34,7 @@ const visible = props.items.some((item) => {
                 <SidebarGroupContent>
                     <SidebarMenu>
                         <SidebarMenuItem v-for="item in items" :key="item.title">
-                            <SidebarMenuButton as-child :is-active="item.href === page.url" v-if="item.permission && page.props.auth.permissions.includes(item.permission)">
+                            <SidebarMenuButton as-child :is-active="item.href === page.url">
                                 <Link :href="item.href">
                                     <component :is="item.icon" />
                                     <span>{{ item.title }}</span>

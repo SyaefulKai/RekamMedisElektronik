@@ -12,6 +12,7 @@ class RoleController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Role::class);
         return Inertia::render('authorization/roles/Index', [
             'roles' => Role::with('permissions')->get(),
         ]);
@@ -19,13 +20,14 @@ class RoleController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Role::class);
         return Inertia::render('authorization/roles/Create');
     }
 
     public function edit(Role $role)
     {
+        $this->authorize('update', $role);
         $role->load('permissions');
-
         return Inertia::render('authorization/roles/Edit', [
             'role' => $role,
         ]);
@@ -33,6 +35,7 @@ class RoleController extends Controller
 
     public function store(CreateRoleRequest $request)
     {
+        $this->authorize('create', Role::class);
         $data = $request->validated();
         $role = Role::create([
             'name' => $data['name'],
@@ -45,12 +48,14 @@ class RoleController extends Controller
     {
         $data = collect($request->validated());
         $role = Role::findById($data['role']);
+        $this->authorize('update', $role);
         $role->syncPermissions($data['permissions']);
         return redirect()->back();
     }
 
     public function delete(Role $role)
     {
+        $this->authorize('delete', $role);
         $role->delete();
         return redirect()->back();
     }

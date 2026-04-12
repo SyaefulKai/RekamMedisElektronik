@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { deleteMethod } from '@/actions/App/Http/Controllers/Auth/UserController';
+import { deleteMethod, edit } from '@/actions/App/Http/Controllers/Auth/UserController';
 import DataTable from '@/components/ui/datatable/DataTable.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index } from '@/routes/user';
@@ -27,7 +27,13 @@ const deleteUser = (user: User) => {
     );
 };
 
-const column = UserColumn(deleteUser);
+const editUser = (user: User) => {
+    router.get(edit({
+        user: user.id
+    }).url)
+}
+
+const column = UserColumn(deleteUser, editUser);
 </script>
 
 <template>

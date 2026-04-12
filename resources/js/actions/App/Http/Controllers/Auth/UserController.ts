@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\UserController::index
- * @see app/Http/Controllers/Auth/UserController.php:15
+ * @see app/Http/Controllers/Auth/UserController.php:16
  * @route '/users'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::index
- * @see app/Http/Controllers/Auth/UserController.php:15
+ * @see app/Http/Controllers/Auth/UserController.php:16
  * @route '/users'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::index
- * @see app/Http/Controllers/Auth/UserController.php:15
+ * @see app/Http/Controllers/Auth/UserController.php:16
  * @route '/users'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Auth\UserController::index
- * @see app/Http/Controllers/Auth/UserController.php:15
+ * @see app/Http/Controllers/Auth/UserController.php:16
  * @route '/users'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::store
- * @see app/Http/Controllers/Auth/UserController.php:31
+ * @see app/Http/Controllers/Auth/UserController.php:32
  * @route '/users'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -59,7 +59,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::store
- * @see app/Http/Controllers/Auth/UserController.php:31
+ * @see app/Http/Controllers/Auth/UserController.php:32
  * @route '/users'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -68,7 +68,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::store
- * @see app/Http/Controllers/Auth/UserController.php:31
+ * @see app/Http/Controllers/Auth/UserController.php:32
  * @route '/users'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -78,7 +78,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:23
+ * @see app/Http/Controllers/Auth/UserController.php:24
  * @route '/users/create'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -93,7 +93,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:23
+ * @see app/Http/Controllers/Auth/UserController.php:24
  * @route '/users/create'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -102,7 +102,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:23
+ * @see app/Http/Controllers/Auth/UserController.php:24
  * @route '/users/create'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -111,7 +111,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:23
+ * @see app/Http/Controllers/Auth/UserController.php:24
  * @route '/users/create'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -120,8 +120,133 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \App\Http\Controllers\Auth\UserController::edit
+ * @see app/Http/Controllers/Auth/UserController.php:47
+ * @route '/users/{user}'
+ */
+export const edit = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: edit.url(args, options),
+    method: 'get',
+})
+
+edit.definition = {
+    methods: ["get","head"],
+    url: '/users/{user}',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Auth\UserController::edit
+ * @see app/Http/Controllers/Auth/UserController.php:47
+ * @route '/users/{user}'
+ */
+edit.url = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { user: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { user: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    user: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        user: typeof args.user === 'object'
+                ? args.user.id
+                : args.user,
+                }
+
+    return edit.definition.url
+            .replace('{user}', parsedArgs.user.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Auth\UserController::edit
+ * @see app/Http/Controllers/Auth/UserController.php:47
+ * @route '/users/{user}'
+ */
+edit.get = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: edit.url(args, options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\Auth\UserController::edit
+ * @see app/Http/Controllers/Auth/UserController.php:47
+ * @route '/users/{user}'
+ */
+edit.head = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: edit.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\Auth\UserController::update
+ * @see app/Http/Controllers/Auth/UserController.php:57
+ * @route '/users/{user}'
+ */
+export const update = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: update.url(args, options),
+    method: 'patch',
+})
+
+update.definition = {
+    methods: ["patch"],
+    url: '/users/{user}',
+} satisfies RouteDefinition<["patch"]>
+
+/**
+* @see \App\Http\Controllers\Auth\UserController::update
+ * @see app/Http/Controllers/Auth/UserController.php:57
+ * @route '/users/{user}'
+ */
+update.url = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { user: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { user: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    user: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        user: typeof args.user === 'object'
+                ? args.user.id
+                : args.user,
+                }
+
+    return update.definition.url
+            .replace('{user}', parsedArgs.user.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Auth\UserController::update
+ * @see app/Http/Controllers/Auth/UserController.php:57
+ * @route '/users/{user}'
+ */
+update.patch = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: update.url(args, options),
+    method: 'patch',
+})
+
+/**
 * @see \App\Http\Controllers\Auth\UserController::deleteMethod
- * @see app/Http/Controllers/Auth/UserController.php:46
+ * @see app/Http/Controllers/Auth/UserController.php:67
  * @route '/users/{user}'
  */
 export const deleteMethod = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -136,7 +261,7 @@ deleteMethod.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::deleteMethod
- * @see app/Http/Controllers/Auth/UserController.php:46
+ * @see app/Http/Controllers/Auth/UserController.php:67
  * @route '/users/{user}'
  */
 deleteMethod.url = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -169,13 +294,13 @@ deleteMethod.url = (args: { user: number | { id: number } } | [user: number | { 
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::deleteMethod
- * @see app/Http/Controllers/Auth/UserController.php:46
+ * @see app/Http/Controllers/Auth/UserController.php:67
  * @route '/users/{user}'
  */
 deleteMethod.delete = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: deleteMethod.url(args, options),
     method: 'delete',
 })
-const UserController = { index, store, create, deleteMethod, delete: deleteMethod }
+const UserController = { index, store, create, edit, update, deleteMethod, delete: deleteMethod }
 
 export default UserController

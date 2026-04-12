@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -40,6 +41,26 @@ class UserController extends Controller
 
         $role = Role::where('id', $data['role'])->firstOrFail();
         $user->assignRole($role);
+        return redirect()->to(route('user.index'));
+    }
+
+    public function edit(User $user)
+    {
+        $this->authorize('update', $user);
+        $user->load('roles:id,name');
+        return Inertia::render('auth/Edit', [
+            'user' => $user,
+            'roles' => Role::whereHas('permissions')->get()
+        ]);
+    }
+
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $this->authorize('update', $user);
+        $data = $request->validated();
+        $user->update($data);
+        $role = Role::where('id', $data['role'])->firstOrFail();
+        $user->syncRoles($role);
         return redirect()->to(route('user.index'));
     }
 

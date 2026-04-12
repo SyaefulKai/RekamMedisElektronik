@@ -1,9 +1,10 @@
 import DeleteUserButton from "@/pages/auth/components/DeleteUserButton.vue";
+import EditUserButton from "@/pages/auth/components/EditUserButton.vue";
 import { User } from "@/types";
 import { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 
-export const UserColumn = (onDelete: (user: User) => void): ColumnDef<User>[] => [
+export const UserColumn = (onDelete: (user: User) => void, onEdit: (user: User) => void): ColumnDef<User>[] => [
     {
         accessorKey: 'name',
         header: 'Nama'
@@ -19,6 +20,10 @@ export const UserColumn = (onDelete: (user: User) => void): ColumnDef<User>[] =>
                 h(DeleteUserButton, {
                     user: row.original,
                     onDelete: () => onDelete(row.original)
+                }),
+                h(EditUserButton, {
+                    user: row.original,
+                    onEdit: () => onEdit(row.original)
                 })
             ])
         }

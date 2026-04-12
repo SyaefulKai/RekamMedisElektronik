@@ -18,7 +18,7 @@ const props = defineProps<{
   <div class="flex flex-col gap-6">
     <Pagination v-slot="{ page }" :items-per-page="table.getState().pagination.pageSize" :total="table.getRowCount()" :default-page="table.getState().pagination.pageIndex + 1">
       <PaginationContent v-slot="{ items }">
-        <PaginationPrevious @click="table.previousPage()" :disabled="loading"/>
+        <PaginationPrevious @click="table.previousPage()" :disabled="loading" v-if="table.getCanPreviousPage()"/>
         <template v-for="(item, index) in items" :key="index">
           <PaginationItem
             v-if="item.type === 'page'"
@@ -31,7 +31,7 @@ const props = defineProps<{
           </PaginationItem>
         </template>
 
-        <PaginationNext @click="table.nextPage()" :disabled="loading"/>
+        <PaginationNext @click="table.nextPage()" :disabled="loading" v-if="table.getCanNextPage()"/>
       </PaginationContent>
     </Pagination>
   </div>

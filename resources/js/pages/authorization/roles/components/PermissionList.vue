@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Checkbox } from '@/components/ui/checkbox';
-import { Item, ItemContent, ItemDescription, ItemGroup, ItemSeparator } from '@/components/ui/item';
+import { Item, ItemContent, ItemGroup, ItemTitle } from '@/components/ui/item';
 import ItemActions from '@/components/ui/item/ItemActions.vue';
+import { Label } from '@/Components/ui/label';
 import { dashboardPermisions, medicalRecordPermissions, registrationPermissions } from '@/constant/permission';
 import { Permission } from '@/types';
 import { computed, ref } from 'vue';
@@ -37,18 +38,25 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <ItemGroup v-for="[name, permissions] in Object.entries(permissionList)" :key="name" class="rounded border p-4">
+    <ItemGroup v-for="[name, permissions] in Object.entries(permissionList)" :key="name" class="flex flex-col gap-4 rounded border p-8">
         {{ name }}
-        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission">
+        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission" class="bg-input p-0">
+            <Label :for="label" class="w-full flex items-center cursor-pointer p-4">
             <ItemContent>
-                <ItemDescription>
-                    {{ label }}
-                </ItemDescription>
-            </ItemContent>
-            <ItemActions>
-                <Checkbox :default-checked="permissionNames.includes(permission)" :value="permission" @update:checked="() => onCheck(permission)" />
-            </ItemActions>
-            <ItemSeparator v-if="Object.entries(permissions).length > 1"/>
+                    <ItemTitle >
+                        {{ label }}
+                    </ItemTitle>
+                </ItemContent>
+                <ItemActions>
+                    <Checkbox
+                    :id="label"
+                    :default-checked="permissionNames.includes(permission)"
+                    :value="permission"
+                    @update:checked="() => onCheck(permission)"
+                    class="bg-background"
+                    />
+                </ItemActions>
+            </Label>
         </Item>
     </ItemGroup>
 </template>

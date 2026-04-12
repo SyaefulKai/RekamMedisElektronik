@@ -76,7 +76,7 @@ const submit = form.handleSubmit((data) => {
             </Field>
         </VeeField>
     </form>
-    <div class="mt-4 flex justify-end">
+    <div class="mt-4 grid md:flex md:justify-end">
         <Button form="create-user">Tambah Pengguna</Button>
     </div>
 </template>

@@ -6,6 +6,7 @@ import { ref } from 'vue';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from './ui/sidebar';
 import { PermissionKey } from '@/types/authorization/permission';
+import { Separator } from '@/components/ui/separator';
 
 const page = usePage<SharedData>();
 const props = defineProps<{
@@ -41,13 +42,14 @@ const visible = page.props.auth.permissions.some((permission) => {
             <CollapsibleContent>
                 <SidebarGroupContent>
                     <SidebarMenu>
-                        <SidebarMenuItem v-for="item in items" :key="item.title">
+                        <SidebarMenuItem v-for="(item, index) in items" :key="item.title">
                             <SidebarMenuButton as-child :is-active="item.href === page.url" v-if="item.permission && page.props.auth.permissions.includes(item.permission)">
                                 <Link :href="item.href">
                                     <component :is="item.icon" />
                                     <span>{{ item.title }}</span>
                                 </Link>
                             </SidebarMenuButton>
+                            <Separator v-if="index < items.length - 1"/>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarGroupContent>

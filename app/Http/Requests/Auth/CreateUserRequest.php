@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,21 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => [
-                'nullable',
+                'required',
                 'string'
             ],
             'email' => [
-                'nullable',
-                'email',
+                'required',
+                'string',
                 'unique:users,email'
             ],
+            'password' => [
+                'required',
+                'string',
+                'min:5'
+            ],
             'role' => [
-                'nullable',
+                'required',
                 'exists:roles,id'
             ]
         ];

@@ -7,9 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Role, User } from '@/types';
 import RoleList from '@/pages/authorization/roles/components/RoleList.vue';
 import { Button } from '@/components/ui/button';
-import { CreateUserSchema } from '@/schemas/user';
+import { EditUserSchema } from '@/schemas/user';
 
-const schema = toTypedSchema(CreateUserSchema)
+const schema = toTypedSchema(EditUserSchema)
 
 const props = defineProps<{
     user: User & {
@@ -28,7 +28,7 @@ const form = useForm({
 })
 
 const emit = defineEmits<{
-    (e: 'submit', val: z.infer<typeof CreateUserSchema>): void
+    (e: 'submit', val: z.infer<typeof EditUserSchema>): void
 }>()
 
 const submit = form.handleSubmit((data) => {
@@ -38,7 +38,7 @@ const submit = form.handleSubmit((data) => {
 </script>
 
 <template>
-    <form id="create-user" class="flex flex-col gap-4" @submit="submit">
+    <form id="edit-user" class="flex flex-col gap-4" @submit="submit">
         <VeeField name="name" v-slot="{field, errors}">
             <Field>
                 <FieldLabel>Nama</FieldLabel>
@@ -74,6 +74,6 @@ const submit = form.handleSubmit((data) => {
         </VeeField>
     </form>
     <div class="mt-4 grid md:flex md:justify-end">
-        <Button form="create-user">Ubah Pengguna</Button>
+        <Button form="edit-user">Ubah Pengguna</Button>
     </div>
 </template>

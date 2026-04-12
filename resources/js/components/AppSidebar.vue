@@ -3,10 +3,14 @@ import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
+import { index as UserIndex, create as UserCreate } from '@/routes/user';
+import { index as RoleIndex, create as RoleCreate } from '@/actions/App/Http/Controllers/Authorization/RoleController';
+import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Shield, ShieldPlus, User, UserPlus } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import NavAuthorization from './NavAuthorization.vue';
+import NavUserManagement from './NavUserManagement.vue';
 
 const mainNavItems: NavItem[] = [
     {
@@ -14,6 +18,36 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+];
+
+const authorization: NavItem[] = [
+    {
+        title: 'Peran',
+        href: RoleIndex().url,
+        icon: Shield,
+        permission: "view.role",
+    },
+    {
+        title: 'Tambah Peran',
+        href: RoleCreate().url,
+        icon: ShieldPlus,
+        permission: 'create.role',
+    }
+];
+
+const userManagement: NavItem[] = [
+    {
+        title: 'Pengguna',
+        href: UserIndex().url,
+        icon: User,
+        permission: 'view.user',
+    },
+    {
+        title: 'Tambah Pengguna',
+        href: UserCreate().url,
+        icon: UserPlus,
+        permission: 'create.user'
+    }
 ];
 
 const footerNavItems: NavItem[] = [
@@ -44,8 +78,10 @@ const footerNavItems: NavItem[] = [
             </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent class="p-4 md:p-0 lg:p-0">
             <NavMain :items="mainNavItems" />
+            <NavAuthorization :items="authorization" />
+            <NavUserManagement :items="userManagement" />
         </SidebarContent>
 
         <SidebarFooter>

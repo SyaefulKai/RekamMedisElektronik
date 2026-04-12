@@ -4,6 +4,7 @@ import laravel from 'laravel-vite-plugin';
 import path from 'path';
 import tailwindcss from 'tailwindcss';
 import { defineConfig } from 'vite';
+import { wayfinder } from "@laravel/vite-plugin-wayfinder";
 
 export default defineConfig({
     plugins: [
@@ -19,6 +20,7 @@ export default defineConfig({
                 },
             },
         }),
+        wayfinder()
     ],
     resolve: {
         alias: {

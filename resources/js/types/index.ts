@@ -3,7 +3,7 @@ import { PermissionKey } from './authorization/permission';
 
 export interface Auth {
     user: User;
-    permissions: string[]
+    permissions: PermissionKey[]
 }
 
 export interface BreadcrumbItem {

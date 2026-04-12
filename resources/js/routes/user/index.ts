@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::store
- * @see app/Http/Controllers/Auth/UserController.php:29
+ * @see app/Http/Controllers/Auth/UserController.php:31
  * @route '/users'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -59,7 +59,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::store
- * @see app/Http/Controllers/Auth/UserController.php:29
+ * @see app/Http/Controllers/Auth/UserController.php:31
  * @route '/users'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -68,7 +68,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::store
- * @see app/Http/Controllers/Auth/UserController.php:29
+ * @see app/Http/Controllers/Auth/UserController.php:31
  * @route '/users'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -78,7 +78,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:22
+ * @see app/Http/Controllers/Auth/UserController.php:23
  * @route '/users/create'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -93,7 +93,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:22
+ * @see app/Http/Controllers/Auth/UserController.php:23
  * @route '/users/create'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -102,7 +102,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:22
+ * @see app/Http/Controllers/Auth/UserController.php:23
  * @route '/users/create'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -111,7 +111,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Auth\UserController::create
- * @see app/Http/Controllers/Auth/UserController.php:22
+ * @see app/Http/Controllers/Auth/UserController.php:23
  * @route '/users/create'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

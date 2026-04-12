@@ -3,11 +3,11 @@ import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { index as UserIndex } from '@/routes/user';
+import { index as UserIndex, create as UserCreate } from '@/routes/user';
 import { index as RoleIndex, create as RoleCreate } from '@/actions/App/Http/Controllers/Authorization/RoleController';
 import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Shield, ShieldPlus, User } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Shield, ShieldPlus, User, UserPlus } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import NavAuthorization from './NavAuthorization.vue';
 import NavUserManagement from './NavUserManagement.vue';
@@ -42,6 +42,12 @@ const userManagement: NavItem[] = [
         icon: User,
         permission: 'view.user',
     },
+    {
+        title: 'Tambah Pengguna',
+        href: UserCreate().url,
+        icon: UserPlus,
+        permission: 'create.user'
+    }
 ];
 
 const footerNavItems: NavItem[] = [

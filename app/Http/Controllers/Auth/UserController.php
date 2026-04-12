@@ -14,6 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', User::class);
         return Inertia::render('auth/Index', [
             'users' => User::paginate(10)
         ]);
@@ -21,6 +22,7 @@ class UserController extends Controller
 
     public function create()
     {
+        $this->authorize('create', User::class);
         return Inertia::render('auth/Create', [
             'roles' => Role::whereHas('permissions')->get()
         ]);
@@ -28,6 +30,7 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
+        $this->authorize('create', User::class);
         $data = $request->validated();
         $user = User::create([
             'name' => $data['name'],

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Item, ItemActions, ItemContent, ItemDescription } from '@/components/ui/item';
-import { Label } from '@/Components/ui/label';
+import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Role } from '@/types';
 import { computed } from 'vue';

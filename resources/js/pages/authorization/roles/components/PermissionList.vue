@@ -2,7 +2,7 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Item, ItemContent, ItemGroup, ItemTitle } from '@/components/ui/item';
 import ItemActions from '@/components/ui/item/ItemActions.vue';
-import { Label } from '@/Components/ui/label';
+import { Label } from '@/components/ui/label';
 import { dashboardPermisions, medicalRecordPermissions, registrationPermissions, rolePermissions, userPermissions } from '@/constant/permission';
 import { Permission } from '@/types';
 import { computed, ref } from 'vue';

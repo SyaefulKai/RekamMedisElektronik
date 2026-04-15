@@ -18,6 +18,8 @@ class Patient extends Model
     use HasFactory;
     protected $fillable = [
         'nik',
+        'medical_record_number',
+        'gender',
         'name',
         'birth_date',
         'address'
@@ -33,7 +35,6 @@ class Patient extends Model
     {
         return Attribute::make(
             get: fn($value) => Carbon::parse($value)->format('d M Y'),
-            set: fn($value) => Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d'),
         );
     }
 }

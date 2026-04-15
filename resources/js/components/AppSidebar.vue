@@ -1,18 +1,18 @@
 <script setup lang="ts">
+import { create as RoleCreate, index as RoleIndex } from '@/actions/App/Http/Controllers/Authorization/RoleController';
+import { create as PatientCreate, index as PatientIndex } from '@/actions/App/Http/Controllers/Resources/PatientController';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
+import NavPatientManagement from '@/components/NavPatientManagement.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { index as UserIndex, create as UserCreate } from '@/routes/user';
-import { index as RoleIndex, create as RoleCreate } from '@/actions/App/Http/Controllers/Authorization/RoleController';
+import { create as UserCreate, index as UserIndex } from '@/routes/user';
 import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, PersonStanding, Shield, ShieldPlus, User, UserPlus } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import NavAuthorization from './NavAuthorization.vue';
 import NavUserManagement from './NavUserManagement.vue';
-import { index as PatientIndex } from '@/actions/App/Http/Controllers/Resources/PatientController';
-import NavPatientManagement from '@/components/NavPatientManagement.vue';
 
 const mainNavItems: NavItem[] = [
     {
@@ -26,13 +26,13 @@ const authorization: NavItem[] = [
     {
         title: 'Peran',
         href: RoleIndex().url,
-        permission: "view.role",
+        permission: 'view.role',
     },
     {
         title: 'Tambah Peran',
         href: RoleCreate().url,
         permission: 'create.role',
-    }
+    },
 ];
 
 const userManagement: NavItem[] = [
@@ -44,17 +44,21 @@ const userManagement: NavItem[] = [
     {
         title: 'Tambah Pengguna',
         href: UserCreate().url,
-        permission: 'create.user'
-    }
+        permission: 'create.user',
+    },
 ];
 
 const patientManagement: NavItem[] = [
     {
         title: 'Pasien',
         href: PatientIndex().url,
-        permission: 'view.patient'
-    }
-]
+        permission: 'view.patient',
+    },
+    {
+        title: 'Tambah Pasien',
+        href: PatientCreate().url,
+    },
+];
 
 const footerNavItems: NavItem[] = [
     {
@@ -86,7 +90,7 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent class="p-4 md:p-0 lg:p-0">
             <NavMain :items="mainNavItems" />
-            <NavPatientManagement :items="patientManagement"/>
+            <NavPatientManagement :items="patientManagement" />
             <NavAuthorization :items="authorization" />
             <NavUserManagement :items="userManagement" />
         </SidebarContent>

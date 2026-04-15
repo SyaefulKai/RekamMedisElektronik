@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('Admin');
 
-        Patient::factory()->count(100)->create();
+        // Patient::factory()->count(100)->create();
     }
 }

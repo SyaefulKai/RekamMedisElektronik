@@ -21,6 +21,7 @@ class PatientFactory extends Factory
     {
         $gender = $this->faker->randomElement(['male', 'female']);
         return [
+            'medical_record_number' => $this->faker->randomNumber(6),
             'nik' => $this->faker->nik(),
             'name' => $this->faker->name($gender),
             'gender' => $gender,

@@ -10,3 +10,4 @@ export const CreateUserSchema = z.object({
 export const EditUserSchema = CreateUserSchema.omit({
     password: true
 })
+

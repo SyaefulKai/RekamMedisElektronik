@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { deleteMethod, edit } from '@/actions/App/Http/Controllers/Auth/UserController';
 import DataTable from '@/components/ui/datatable/DataTable.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index } from '@/routes/user';
 import { BreadcrumbItem, Pagination, Role, User } from '@/types';
-import { Head, router } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { UserColumn } from './columns/user-column';
 import CreateUserButton from './components/CreateUserButton.vue';
 
@@ -21,21 +20,7 @@ defineProps<{
     }>;
 }>();
 
-const deleteUser = (user: User) => {
-    router.delete(
-        deleteMethod({
-            user: user.id,
-        }).url,
-    );
-};
-
-const editUser = (user: User) => {
-    router.get(edit({
-        user: user.id
-    }).url)
-}
-
-const column = UserColumn(deleteUser, editUser);
+const column = UserColumn;
 </script>
 
 <template>

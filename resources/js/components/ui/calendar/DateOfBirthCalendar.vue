@@ -21,6 +21,8 @@ const date = ref(today(getLocalTimeZone())) as Ref<DateValue>
 const emit = defineEmits<{
     (e: 'selected', val: DateValue): void
 }>()
+
+const defaultPlaceholder = today(getLocalTimeZone())
 </script>
 
 <template>
@@ -43,6 +45,8 @@ const emit = defineEmits<{
         <Calendar
           :model-value="date"
           layout="month-and-year"
+          :default-placeholder="defaultPlaceholder"
+          disable-days-outside-current-view
           @update:model-value="(value) => {
             if (value) {
               date = value

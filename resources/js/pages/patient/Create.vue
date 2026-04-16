@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { index } from '@/actions/App/Http/Controllers/Resources/PatientController';
+import { create, index } from '@/actions/App/Http/Controllers/Resources/PatientController';
 import AppLayout from '@/layouts/AppLayout.vue';
 import CreatePatientForm from '@/pages/patient/components/CreatePatientForm.vue';
 import { store } from '@/routes/patient';
@@ -12,6 +12,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     {
         'title': 'Pasien',
         'href': index().url
+    },
+    {
+        'title': 'Tambah Pasien',
+        'href': create().url
     }
 ]
 

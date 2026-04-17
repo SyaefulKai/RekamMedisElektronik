@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreatePatientRequest extends FormRequest
+class UpdatePatientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,26 +28,26 @@ class CreatePatientRequest extends FormRequest
                 'sometimes',
             ],
             'medical_record_number' => [
-                'required',
+                'sometimes',
                 'string'
             ],
             'name' => [
-                'required',
+                'sometimes',
                 'string'
             ],
             'birth_date' => [
-                'required',
+                'sometimes',
                 'date'
             ],
             'gender' => [
-                'required',
+                'sometimes',
                 Rule::in([
                     'male',
                     'female'
                 ])
             ],
             'address' => [
-                'required',
+                'sometimes',
                 'string'
             ]
         ];

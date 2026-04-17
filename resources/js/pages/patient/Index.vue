@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { create, index } from '@/actions/App/Http/Controllers/Resources/PatientController';
-import { Button } from '@/components/ui/button';
+import LinkButton from '@/components/LinkButton.vue';
 import DataTable from '@/components/ui/datatable/DataTable.vue';
 import DataTableSearch from '@/components/ui/datatable/DataTableSearch.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { PatientColumn } from '@/pages/patient/columns/patient-column';
 import { BreadcrumbItem, Pagination } from '@/types';
 import { Patient } from '@/types/resources/patient';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import { useDebounceFn } from '@vueuse/core';
 import { computed } from 'vue';
 
@@ -50,9 +50,7 @@ const handleSearch = useDebounceFn((value: string) => {
             <DataTable :columns="column" :pagination="patients">
                 <template #toolbar>
                     <div class="flex w-full flex-col gap-4 md:w-[50%] md:flex-row lg:w-[25%]">
-                        <Button as-child>
-                            <Link :href="create().url"> Tambah Pasien </Link>
-                        </Button>
+                        <LinkButton :href="create().url" label="Tambah Pasien"/>
                         <DataTableSearch @input="handleSearch" class="grow" />
                     </div>
                 </template>

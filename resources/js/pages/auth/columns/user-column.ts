@@ -1,6 +1,5 @@
 import { deleteMethod, edit } from "@/actions/App/Http/Controllers/Auth/UserController";
-import DeleteResourceButton from "@/components/DeleteResourceButton.vue";
-import EditResourceButton from "@/components/EditResourceButton.vue";
+import LinkButton from "@/components/LinkButton.vue";
 import { Role, User } from "@/types";
 import { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
@@ -26,15 +25,19 @@ export const UserColumn: ColumnDef<User & {
             header: 'Aksi',
             cell: ({ row }) => {
                 return h('div', { class: 'flex gap-4' }, [
-                    h(DeleteResourceButton, {
-                        path: deleteMethod({
+                    h(LinkButton, {
+                        href: deleteMethod({
                             user: row.original.id,
-                        }).url
+                        }).url,
+                        label: 'Hapus',
+                        variant: 'destructive'
                     }),
-                    h(EditResourceButton, {
-                        path: edit({
+                    h(LinkButton, {
+                        href: edit({
                             user: row.original.id,
-                        }).url
+                        }).url,
+                        label: 'Edit',
+                        variant: 'secondary'
                     })
                 ])
             }

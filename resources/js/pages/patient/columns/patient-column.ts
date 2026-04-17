@@ -1,4 +1,4 @@
-import EditResourceButton from "@/components/EditResourceButton.vue";
+import LinkButton from "@/components/LinkButton.vue";
 import { edit } from "@/routes/patient";
 import { Patient } from "@/types/resources/patient";
 import { ColumnDef } from "@tanstack/vue-table";
@@ -21,10 +21,12 @@ export const PatientColumn = (): ColumnDef<Patient>[] => [
         header: 'Aksi',
         cell: ({row}) => {
             return h('div', [
-                h(EditResourceButton, {
-                    path: edit({
+                h(LinkButton, {
+                    href: edit({
                         patient: row.original.id
-                    }).url
+                    }).url,
+                    label: 'Edit',
+                    variant: 'secondary'
                 })
             ]);
         }

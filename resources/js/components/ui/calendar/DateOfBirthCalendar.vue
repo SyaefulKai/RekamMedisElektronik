@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DateValue } from '@internationalized/date'
-import { getLocalTimeZone, today } from '@internationalized/date'
+import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date'
 import { ChevronDownIcon } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -12,17 +12,22 @@ import {
 } from '@/components/ui/popover'
 import { ref, Ref } from 'vue'
 
-defineProps<{
-    label?: string
+const props = defineProps<{
+    label?: string,
+    defaultDate?: Date,
 }>()
 
-const date = ref(today(getLocalTimeZone())) as Ref<DateValue>
+const date = ref(props.defaultDate ? new CalendarDate(
+    props.defaultDate.getFullYear(),
+    props.defaultDate.getMonth(),
+    props.defaultDate.getDate(),
+) : today(getLocalTimeZone())) as Ref<DateValue>
 
 const emit = defineEmits<{
     (e: 'selected', val: DateValue): void
 }>()
 
-const defaultPlaceholder = today(getLocalTimeZone())
+const defaultPlaceholder = date ?? today(getLocalTimeZone())
 </script>
 
 <template>

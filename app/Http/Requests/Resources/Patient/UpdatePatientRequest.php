@@ -49,6 +49,10 @@ class UpdatePatientRequest extends FormRequest
             'address' => [
                 'sometimes',
                 'string'
+            ],
+            'occupation' => [
+                'sometimes',
+                'string'
             ]
         ];
     }

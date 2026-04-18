@@ -26,7 +26,8 @@ class PatientFactory extends Factory
             'name' => $this->faker->name($gender),
             'gender' => $gender,
             'birth_date' => $this->faker->dateTimeBetween('-30 years', '-20 years'),
-            'address' => $this->faker->address()
+            'address' => $this->faker->address(),
+            'occupation' => $this->faker->jobTitle()
         ];
     }
 }

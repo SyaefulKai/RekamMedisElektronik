@@ -49,6 +49,10 @@ class CreatePatientRequest extends FormRequest
             'address' => [
                 'required',
                 'string'
+            ],
+            'occupation' => [
+                'sometimes',
+                'string',
             ]
         ];
     }

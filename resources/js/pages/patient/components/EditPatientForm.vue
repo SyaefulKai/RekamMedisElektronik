@@ -137,7 +137,8 @@
                         </Field>
                     </VeeField>
                 </div>
-                <VeeField name="address" v-slot="{ field, errors }">
+                <div class="flex flex-col gap-4 md:flex-row">
+                    <VeeField name="address" v-slot="{ field, errors }">
                     <Field class="col-span-2">
                         <FieldLabel> Alamat </FieldLabel>
                         <FieldContent>
@@ -153,6 +154,23 @@
                         />
                     </Field>
                 </VeeField>
+                    <VeeField name="occupation" v-slot="{ field, errors }">
+                    <Field class="col-span-2">
+                        <FieldLabel> Pekerjaan </FieldLabel>
+                        <FieldContent>
+                            <Input v-bind="field" v-model="field.value"/>
+                        </FieldContent>
+                        <FieldError
+                            v-if="errors.length"
+                            :errors="
+                                errors.map((error) => ({
+                                    message: error,
+                                }))
+                            "
+                        />
+                    </Field>
+                </VeeField>
+                </div>
             </form>
             <div>
                 <Button form="edit-patient"> Simpan Perubahan </Button>

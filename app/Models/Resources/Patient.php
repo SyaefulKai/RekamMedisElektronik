@@ -23,7 +23,8 @@ class Patient extends Model
         'gender',
         'name',
         'birth_date',
-        'address'
+        'address',
+        'occupation'
     ];
 
     protected $hidden = [

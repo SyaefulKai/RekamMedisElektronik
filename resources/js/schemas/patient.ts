@@ -16,4 +16,5 @@ export const CreatePatientSchema = z.object({
         message: "Jenis kelamin wajib diisi."
     }),
     address: z.string().optional(),
+    occupation: z.string().optional()
 })

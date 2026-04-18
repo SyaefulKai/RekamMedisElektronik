@@ -43,7 +43,7 @@ const emit = defineEmits<{
 <template>
     <ItemGroup v-for="[name, permissions] in Object.entries(permissionList)" :key="name" class="flex flex-col gap-4 rounded border p-8">
         {{ name }}
-        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission" class="bg-input p-0">
+        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission" class="bg-input border-border p-0">
             <Label :for="label" class="w-full flex items-center cursor-pointer p-4">
             <ItemContent>
                     <ItemTitle >
@@ -56,7 +56,7 @@ const emit = defineEmits<{
                     :default-checked="permissionNames.includes(permission)"
                     :value="permission"
                     @update:checked="() => onCheck(permission)"
-                    class="bg-background"
+                    class="bg-background border-border"
                     />
                 </ItemActions>
             </Label>

@@ -29,6 +29,7 @@ export const UserColumn: ColumnDef<User & {
                         href: deleteMethod({
                             user: row.original.id,
                         }).url,
+                        method: 'delete',
                         label: 'Hapus',
                         variant: 'destructive'
                     }),
@@ -36,6 +37,7 @@ export const UserColumn: ColumnDef<User & {
                         href: edit({
                             user: row.original.id,
                         }).url,
+                        method: 'patch',
                         label: 'Edit',
                         variant: 'secondary'
                     })

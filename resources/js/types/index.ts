@@ -75,3 +75,5 @@ export type Pagination<T> = {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export type HttpMethod = "get" | "post" | "put" | "patch"  | "delete"

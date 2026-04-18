@@ -1,3 +1,4 @@
+import { deleteMethod } from "@/actions/App/Http/Controllers/Resources/PatientController";
 import LinkButton from "@/components/LinkButton.vue";
 import { edit } from "@/routes/patient";
 import { Patient } from "@/types/resources/patient";
@@ -19,12 +20,23 @@ export const PatientColumn = (): ColumnDef<Patient>[] => [
     },
     {
         header: 'Aksi',
-        cell: ({row}) => {
-            return h('div', [
+        cell: ({ row }) => {
+            return h('div', {
+                class: 'flex gap-4'
+            }, [
+                h(LinkButton, {
+                    href: deleteMethod({
+                        patient: row.original.id,
+                    }).url,
+                    method: "delete",
+                    label: 'Hapus',
+                    variant: 'destructive'
+                }),
                 h(LinkButton, {
                     href: edit({
                         patient: row.original.id
                     }).url,
+                    method: "get",
                     label: 'Edit',
                     variant: 'secondary'
                 })

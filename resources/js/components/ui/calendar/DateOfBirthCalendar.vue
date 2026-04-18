@@ -55,7 +55,9 @@ const defaultPlaceholder = date ?? today(getLocalTimeZone())
           @update:model-value="(value) => {
             if (value) {
               date = value
-              emit('selected', date)
+              emit('selected', date.add({
+                days: 1
+              }))
               close()
             }
           }"

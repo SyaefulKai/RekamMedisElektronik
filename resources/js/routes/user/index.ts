@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
+import practitioner from './practitioner'
 /**
 * @see \App\Http\Controllers\Auth\UserController::index
  * @see app/Http/Controllers/Auth/UserController.php:16
@@ -308,6 +309,7 @@ create: Object.assign(create, create),
 edit: Object.assign(edit, edit),
 update: Object.assign(update, update),
 delete: Object.assign(deleteMethod, deleteMethod),
+practitioner: Object.assign(practitioner, practitioner),
 }
 
 export default user

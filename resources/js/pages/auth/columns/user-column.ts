@@ -1,4 +1,5 @@
 import { deleteMethod, edit } from "@/actions/App/Http/Controllers/Auth/UserController";
+import { create } from "@/actions/App/Http/Controllers/Resources/PractitionerController";
 import LinkButton from "@/components/LinkButton.vue";
 import { Role, User } from "@/types";
 import { ColumnDef } from "@tanstack/vue-table";
@@ -40,6 +41,13 @@ export const UserColumn: ColumnDef<User & {
                         method: 'patch',
                         label: 'Edit',
                         variant: 'secondary'
+                    }),
+                    h(LinkButton, {
+                        href: create({
+                            user: row.original.id,
+                        }).url,
+                        label: 'Daftarkan Praktisi',
+                        class: 'bg-green-800 text-white hover:bg-green-900'
                     })
                 ])
             }

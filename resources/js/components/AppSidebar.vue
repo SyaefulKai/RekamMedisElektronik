@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { create as RoleCreate, index as RoleIndex } from '@/actions/App/Http/Controllers/Authorization/RoleController';
 import { create as PatientCreate, index as PatientIndex } from '@/actions/App/Http/Controllers/Resources/PatientController';
+import { index as PractitionerIndex } from '@/actions/App/Http/Controllers/Resources/PractitionerController';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavPatientManagement from '@/components/NavPatientManagement.vue';
@@ -13,6 +14,7 @@ import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import NavAuthorization from './NavAuthorization.vue';
 import NavUserManagement from './NavUserManagement.vue';
+import NavPractitionerManagement from '@/components/NavPractitionerManagement.vue';
 
 const mainNavItems: NavItem[] = [
     {
@@ -60,6 +62,14 @@ const patientManagement: NavItem[] = [
     },
 ];
 
+const practitionerManagement: NavItem[] = [
+    {
+        title: 'Praktisi',
+        href: PractitionerIndex().url,
+        permission: 'view.patient',
+    }
+];
+
 const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
@@ -93,6 +103,7 @@ const footerNavItems: NavItem[] = [
             <NavPatientManagement :items="patientManagement" />
             <NavAuthorization :items="authorization" />
             <NavUserManagement :items="userManagement" />
+            <NavPractitionerManagement :items="practitionerManagement"/>
         </SidebarContent>
 
         <SidebarFooter>

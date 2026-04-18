@@ -13,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-<Button as-child :variant="variant ?? 'default'">
+<Button as-child :variant="variant ?? 'default'" :class="$attrs.class">
     <Link :href="href" :method="method ?? 'get'">
         {{ label }}
     </Link>

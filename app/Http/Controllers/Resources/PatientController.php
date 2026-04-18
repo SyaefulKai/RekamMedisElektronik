@@ -22,7 +22,7 @@ class PatientController extends Controller
     public function create()
     {
         return Inertia::render('patient/Create', [
-            'medical_record_number' => Str::padLeft(Patient::count() + 1, 6, '000000'),
+            'medical_record_number' => Str::padLeft(Patient::withTrashed()->count() + 1, 6, '000000'),
         ]);
     }
 
@@ -44,6 +44,12 @@ class PatientController extends Controller
     {
         $data = $request->validated();
         $patient->update($data);
+        return redirect()->to(route('patient.index'));
+    }
+
+    public function delete(Patient $patient)
+    {
+        $patient->delete();
         return redirect()->to(route('patient.index'));
     }
 }

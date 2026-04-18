@@ -9,4 +9,5 @@ Route::middleware('auth')->prefix('patients')->group(function() {
     Route::get('/{patient}', [PatientController::class, 'edit'])->name('patient.edit');
     Route::patch('/{patient}', [PatientController::class, 'update'])->name('patient.update');
     Route::post('/', [PatientController::class, 'store'])->name('patient.store');
+    Route::delete('/{patient}', [PatientController::class, 'delete'])->name('patient.delete');
 });

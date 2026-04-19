@@ -12,5 +12,8 @@ Route::middleware('auth')->prefix('users')->group(function () {
     Route::patch('/{user}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/{user}', [UserController::class, 'delete'])->name('user.delete');
 
-    Route::get('/{user}/practitioner/create', [PractitionerController::class, 'create'])->name('user.practitioner.create');
+    Route::prefix('/{user}/practitioner')->group(function () {
+        Route::get('/create', [PractitionerController::class, 'create'])->name('user.practitioner.create');
+        Route::post('/', [PractitionerController::class, 'store'])->name('user.practitioner.store');
+    });
 });

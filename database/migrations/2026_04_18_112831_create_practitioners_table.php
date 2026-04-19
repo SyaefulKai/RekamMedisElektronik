@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('practitioners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->text('nik');
             $table->enum('type', array_column(PractitionerType::cases(), 'value'));
             $table->timestamps();
         });

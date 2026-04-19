@@ -6,6 +6,7 @@ import { BreadcrumbItem, Pagination, Role, User } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import { UserColumn } from './columns/user-column';
 import CreateUserButton from './components/CreateUserButton.vue';
+import { Practitioner } from '@/types/resources/practitioner';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -16,7 +17,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 defineProps<{
     users: Pagination<User & {
-        roles: Role[]
+        roles: Role[],
+        practitioner?: Practitioner
     }>;
 }>();
 

@@ -2,11 +2,13 @@ import { deleteMethod, edit } from "@/actions/App/Http/Controllers/Auth/UserCont
 import { create } from "@/actions/App/Http/Controllers/Resources/PractitionerController";
 import LinkButton from "@/components/LinkButton.vue";
 import { Role, User } from "@/types";
+import { Practitioner } from "@/types/resources/practitioner";
 import { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 
 export const UserColumn: ColumnDef<User & {
-    roles: Role[]
+    roles: Role[],
+    practitioner?: Practitioner
 }>[] = [
         {
             accessorKey: 'name',
@@ -23,9 +25,16 @@ export const UserColumn: ColumnDef<User & {
             }
         },
         {
+            header: 'Status Praktisi',
+            cell: ({row}) => {
+                return row.original.practitioner ? 'Ya' : 'Tidak'
+            }
+        },
+        {
             header: 'Aksi',
             cell: ({ row }) => {
-                return h('div', { class: 'flex gap-4' }, [
+
+                const buttons = [
                     h(LinkButton, {
                         href: deleteMethod({
                             user: row.original.id,
@@ -38,18 +47,21 @@ export const UserColumn: ColumnDef<User & {
                         href: edit({
                             user: row.original.id,
                         }).url,
-                        method: 'patch',
+                        method: 'get',
                         label: 'Edit',
                         variant: 'secondary'
                     }),
-                    h(LinkButton, {
-                        href: create({
-                            user: row.original.id,
-                        }).url,
-                        label: 'Daftarkan Praktisi',
-                        class: 'bg-green-800 text-white hover:bg-green-900'
-                    })
-                ])
+                ]
+
+                if (!row.original.practitioner) buttons.push(h(LinkButton, {
+                    href: create({
+                        user: row.original.id,
+                    }).url,
+                    label: 'Daftarkan Praktisi',
+                    class: 'bg-green-800 text-white hover:bg-green-900'
+                }))
+
+                return h('div', { class: 'flex gap-4' }, buttons)
             }
         }
     ]

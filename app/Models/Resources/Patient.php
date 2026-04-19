@@ -12,11 +12,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
+use App\Traits\HasNIK;
 
 #[UseFactory(PatientFactory::class)]
 class Patient extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasNIK;
     protected $fillable = [
         'nik',
         'medical_record_number',
@@ -37,14 +38,6 @@ class Patient extends Model
     {
         return Attribute::make(
             get: fn($value) => Carbon::parse($value)->format('d M Y'),
-        );
-    }
-
-    protected function nik(): Attribute
-    {
-        return Attribute::make(
-            set: fn($value) => Crypt::encryptString($value),
-            get: fn($value) => Crypt::decryptString($value),
         );
     }
 }

@@ -13,7 +13,7 @@ class PractitionerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermissionTo('view.practitioner');
     }
 
     /**
@@ -21,7 +21,7 @@ class PractitionerPolicy
      */
     public function view(User $user, Practitioner $practitioner): bool
     {
-        return false;
+        return $user->hasPermissionTo('view.practitioner');
     }
 
     /**
@@ -29,7 +29,7 @@ class PractitionerPolicy
      */
     public function create(User $user): bool
     {
-        return $user->practitioner == null;
+        return $user->hasPermissionTo('create.practitioner');
     }
 
     /**
@@ -37,7 +37,7 @@ class PractitionerPolicy
      */
     public function update(User $user, Practitioner $practitioner): bool
     {
-        return false;
+        return $user->hasPermissionTo('update.practitioner');
     }
 
     /**
@@ -45,7 +45,7 @@ class PractitionerPolicy
      */
     public function delete(User $user, Practitioner $practitioner): bool
     {
-        return false;
+        return $user->hasPermissionTo('delete.practitioner');
     }
 
     /**

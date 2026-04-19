@@ -1,8 +1,9 @@
 import { deleteMethod, edit } from "@/actions/App/Http/Controllers/Auth/UserController";
 import { create } from "@/actions/App/Http/Controllers/Resources/PractitionerController";
 import LinkButton from "@/components/LinkButton.vue";
-import { Role, User } from "@/types";
+import { Role, SharedData, User } from "@/types";
 import { Practitioner } from "@/types/resources/practitioner";
+import { usePage } from "@inertiajs/vue3";
 import { ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 
@@ -26,13 +27,15 @@ export const UserColumn: ColumnDef<User & {
         },
         {
             header: 'Status Praktisi',
-            cell: ({row}) => {
+            cell: ({ row }) => {
                 return row.original.practitioner ? 'Ya' : 'Tidak'
             }
         },
         {
             header: 'Aksi',
             cell: ({ row }) => {
+
+                const { permissions } = usePage<SharedData>().props.auth
 
                 const buttons = [
                     h(LinkButton, {
@@ -53,7 +56,7 @@ export const UserColumn: ColumnDef<User & {
                     }),
                 ]
 
-                if (!row.original.practitioner) buttons.push(h(LinkButton, {
+                if (!row.original.practitioner && permissions.includes('create.practitioner')) buttons.push(h(LinkButton, {
                     href: create({
                         user: row.original.id,
                     }).url,

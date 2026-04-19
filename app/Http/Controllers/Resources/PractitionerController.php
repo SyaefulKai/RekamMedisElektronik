@@ -12,6 +12,7 @@ class PractitionerController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Practitioner::class);
         return Inertia::render('practitioner/Index', [
             'practitioners' => Practitioner::with('user')->paginate(10),
         ]);
@@ -27,6 +28,7 @@ class PractitionerController extends Controller
 
     public function store(User $user, CreatePractitionerRequest $request)
     {
+        $this->authorize('create', Practitioner::class);
         $data = $request->validated();
         $user->practitioner()->create($data);
         return redirect()->to(route('user.index'));

@@ -49,7 +49,7 @@ const handleSearch = useDebounceFn((value: string) => {
             <DataTable :columns="column" :pagination="practitioners">
                 <template #toolbar>
                     <div class="flex w-full flex-col gap-4 md:w-[50%] md:flex-row lg:w-[25%]">
-                        <!-- <DataTableSearch @input="handleSearch" class="grow" /> -->
+                        <DataTableSearch @input="handleSearch" class="grow" />
                     </div>
                 </template>
             </DataTable>

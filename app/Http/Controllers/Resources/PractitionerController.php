@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Resources\Practitioner\CreatePractitionerRequest;
 use App\Models\Resources\Practitioner;
 use App\Models\User;
+use App\Queries\Resources\PractitionerQueryBuilder;
 use Inertia\Inertia;
 
 class PractitionerController extends Controller
 {
-    public function index()
+    public function index(PractitionerQueryBuilder $query)
     {
         $this->authorize('viewAny', Practitioner::class);
         return Inertia::render('practitioner/Index', [
-            'practitioners' => Practitioner::with('user')->paginate(10),
+            'practitioners' => $query->paginate(10),
         ]);
     }
 

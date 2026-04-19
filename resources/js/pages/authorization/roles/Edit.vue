@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { BreadcrumbItem, Role } from '@/types';
-import { usePage } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import PermissionList from './components/PermissionList.vue';
 import { ref } from 'vue';
 import SavePermissionButton from './components/SavePermissionButton.vue';
@@ -28,6 +28,7 @@ defineProps<{
 </script>
 
 <template>
+    <Head title="Edit Izin Pengguna"/>
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-4">
             <div class="p-4 flex justify-between">

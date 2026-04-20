@@ -2,16 +2,14 @@
 
 namespace App\Models\Resources;
 
-use App\Observers\PatientObserver;
+use App\Models\Queue;
 use Carbon\Carbon;
 use Database\Factories\PatientFactory;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Crypt;
 use App\Traits\HasNIK;
 
 #[UseFactory(PatientFactory::class)]
@@ -39,5 +37,10 @@ class Patient extends Model
         return Attribute::make(
             get: fn($value) => Carbon::parse($value)->format('d M Y'),
         );
+    }
+
+    public function queue()
+    {
+        return $this->hasMany(Queue::class);
     }
 }

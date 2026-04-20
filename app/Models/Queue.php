@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Resources\Patient;
+use App\Observers\QueueObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Model;
+
+#[ObservedBy(QueueObserver::class)]
+class Queue extends Model
+{
+
+    protected $fillable = [
+        'patient_id',
+        'queue_number',
+        'date',
+        'status'
+    ];
+
+    // public function encounter()
+    // {
+
+    // }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
+}

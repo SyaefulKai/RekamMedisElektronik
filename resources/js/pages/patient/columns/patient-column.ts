@@ -1,8 +1,10 @@
+import { store } from "@/actions/App/Http/Controllers/QueueController";
 import { deleteMethod } from "@/actions/App/Http/Controllers/Resources/PatientController";
 import LinkButton from "@/components/LinkButton.vue";
 import { edit } from "@/routes/patient";
 import { Patient } from "@/types/resources/patient";
 import { ColumnDef } from "@tanstack/vue-table";
+import { User } from "lucide-vue-next";
 import { h } from "vue";
 
 export const PatientColumn = (): ColumnDef<Patient>[] => [
@@ -39,6 +41,18 @@ export const PatientColumn = (): ColumnDef<Patient>[] => [
                     method: "get",
                     label: 'Edit',
                     variant: 'secondary'
+                }),
+                h(LinkButton, {
+                    href: store({
+                        patient: row.original.id
+                    }).url,
+                    method: 'post',
+                    label: 'Buat Antrian',
+                    variant: 'outline',
+                    icon: User,
+                    data: {
+                        patient_id: row.original.id
+                    }
                 })
             ]);
         }

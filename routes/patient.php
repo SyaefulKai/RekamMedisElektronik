@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QueueController;
 use App\Http\Controllers\Resources\PatientController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,4 +11,6 @@ Route::middleware('auth')->prefix('patients')->group(function() {
     Route::patch('/{patient}', [PatientController::class, 'update'])->name('patient.update');
     Route::post('/', [PatientController::class, 'store'])->name('patient.store');
     Route::delete('/{patient}', [PatientController::class, 'delete'])->name('patient.delete');
+
+    Route::get('/{patient}/queues/create', [QueueController::class, 'create'])->name('queue.create');
 });

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->integer('queue_number');
+            $table->foreignId('practitioner_id');
             $table->foreignId('patient_id');
             $table->enum('status', [
                 'pending',

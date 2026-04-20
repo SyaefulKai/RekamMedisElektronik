@@ -4,5 +4,7 @@ export type Patient = {
     nik?: string,
     name: string,
     birth_date: string,
-    address: string
+    address: string,
+    occupation?: string,
+    gender: 'male' | 'female'
 }

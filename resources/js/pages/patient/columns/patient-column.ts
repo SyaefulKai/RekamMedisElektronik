@@ -1,4 +1,4 @@
-import { store } from "@/actions/App/Http/Controllers/QueueController";
+import { create } from "@/actions/App/Http/Controllers/QueueController";
 import { deleteMethod } from "@/actions/App/Http/Controllers/Resources/PatientController";
 import LinkButton from "@/components/LinkButton.vue";
 import { edit } from "@/routes/patient";
@@ -43,16 +43,13 @@ export const PatientColumn = (): ColumnDef<Patient>[] => [
                     variant: 'secondary'
                 }),
                 h(LinkButton, {
-                    href: store({
+                    href: create({
                         patient: row.original.id
                     }).url,
-                    method: 'post',
+                    method: 'get',
                     label: 'Buat Antrian',
                     variant: 'outline',
                     icon: User,
-                    data: {
-                        patient_id: row.original.id
-                    }
                 })
             ]);
         }

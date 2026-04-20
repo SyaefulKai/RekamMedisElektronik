@@ -21,4 +21,18 @@ class PractitionerQueryBuilder
             ->paginate($perPage)
             ->withQueryString();
     }
+
+    public function get(int $limit)
+    {
+        $query = Practitioner::query()->with('user');
+        return QueryBuilder::for($query)
+            ->allowedFilters(
+                AllowedFilter::callback('name', function ($query, $value) {
+                    $query->join('users', 'users.id', '=', 'practitioners.user_id')
+                        ->where('users.name', 'like', "%{$value}%");
+                })
+            )
+            ->limit($limit)
+            ->get();
+    }
 }

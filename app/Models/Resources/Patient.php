@@ -27,7 +27,6 @@ class Patient extends Model
     ];
 
     protected $hidden = [
-        'nik',
         'created_at',
         'updated_at'
     ];

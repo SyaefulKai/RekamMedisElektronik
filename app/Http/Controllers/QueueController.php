@@ -43,6 +43,6 @@ class QueueController extends Controller
             'practitioner_id' => $data['practitioner_id'],
         ]);
 
-        return redirect()->route('patient.index');
+        return redirect()->route('queue.index');
     }
 }

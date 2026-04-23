@@ -3,5 +3,5 @@ import { z } from "zod";
 
 export const CreateQueueSchema = z.object({
     patient: CreatePatientSchema,
-    practitioner: z.number()
+    practitioner_id: z.number()
 })

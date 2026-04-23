@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Queues\CreateQueueRequest;
 use App\Http\Requests\Queues\StoreQueueRequest;
 use App\Models\Queue;
 use App\Models\Resources\Patient;
 use App\Queries\Resources\PractitionerQueryBuilder;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class QueueController extends Controller
@@ -20,9 +20,22 @@ class QueueController extends Controller
         ]);
     }
 
-    public function store(StoreQueueRequest $request)
+    public function store(StoreQueueRequest $request, Patient $patient)
     {
-        Queue::create($request->validated());
-        return redirect()->to(route('patient.index'));
+        $data = $request->validated();
+
+        DB::transaction(function () use ($patient, $data) {
+            $patient->update($data['patient']);
+            Queue::create([
+                'patient_id' => $patient->id,
+                'date'         => today(),
+                'queue_number' => Queue::whereDate('date', today())
+                    ->lockForUpdate()
+                    ->count() + 1,
+                ...$data
+            ]);
+        });
+
+        return redirect()->route('patient.index');
     }
 }

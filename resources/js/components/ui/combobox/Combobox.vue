@@ -24,6 +24,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
+    (e: 'item:select', val: string): void
     (e: 'input:search', val: string): void
 }>()
 
@@ -65,6 +66,7 @@ const search = (val: Event) => {
               @select="() => {
                 value = value === item.value ? '' : item.value
                 open = false
+                emit('item:select', value)
               }"
             >
               <CheckIcon

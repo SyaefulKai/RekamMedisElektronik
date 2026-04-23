@@ -13,15 +13,11 @@ class Queue extends Model
 
     protected $fillable = [
         'patient_id',
+        'practitioner_id',
         'queue_number',
         'date',
         'status'
     ];
-
-    // public function encounter()
-    // {
-
-    // }
 
     public function patient()
     {

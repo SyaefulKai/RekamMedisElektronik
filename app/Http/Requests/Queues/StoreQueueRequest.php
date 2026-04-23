@@ -30,17 +30,12 @@ class StoreQueueRequest extends FormRequest
                 "patient.$key" => $value
             ];
         })->toArray();
-        dd($updatePatientRequestRules);
 
         return array_merge([
             'practitioner_id' => [
                 'required',
-                'exists:practitioner,id'
+                'exists:practitioners,id'
             ],
-            'patient_id' => [
-                'required',
-                'exists:patient,id'
-            ]
         ], $updatePatientRequestRules);
     }
 }

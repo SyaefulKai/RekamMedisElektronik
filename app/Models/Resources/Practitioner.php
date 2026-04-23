@@ -2,6 +2,7 @@
 
 namespace App\Models\Resources;
 
+use App\Models\Queue;
 use App\Models\User;
 use App\Traits\HasNIK;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,11 @@ class Practitioner extends Model
         'nik',
         'type'
     ];
+
+    public function queues()
+    {
+        return $this->hasMany(Queue::class);
+    }
 
     public function user()
     {

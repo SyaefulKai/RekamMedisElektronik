@@ -18,10 +18,11 @@ return new class extends Migration
             $table->foreignId('practitioner_id');
             $table->foreignId('patient_id');
             $table->enum('status', [
-                'pending',
-                'on-progress',
+                'planned',
+                'in-progress',
                 'finished',
-            ])->default('pending');
+                'cancelled'
+            ])->default('planned');
             $table->timestamps();
 
             $table->unique([

@@ -19,7 +19,9 @@ const props = defineProps<{
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Buat Antrian',
-        href: '',
+        href: create({
+            patient: props.patient.id
+        }).url,
     },
 ];
 

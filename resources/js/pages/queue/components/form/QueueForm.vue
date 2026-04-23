@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import PatientField from '@/pages/patient/components/form/PatientField.vue';
 import QueueOptionField from '@/pages/queue/components/form/QueueOptionField.vue';
-import { CreateQueueSchema } from '@/types/queue';
+import { CreateQueueSchema } from '@/schemas/queue';
 import { Patient } from '@/types/resources/patient';
 import { Practitioner } from '@/types/resources/practitioner';
 import { toTypedSchema } from '@vee-validate/zod';

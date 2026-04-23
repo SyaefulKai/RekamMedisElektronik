@@ -9,7 +9,7 @@ import { Head, router } from '@inertiajs/vue3';
 import { provide } from 'vue';
 import { useDebounceFn } from '@vueuse/core';
 import { z } from 'zod';
-import { CreateQueueSchema } from '@/types/queue';
+import { CreateQueueSchema } from '@/schemas/queue';
 
 const props = defineProps<{
     patient: Patient,

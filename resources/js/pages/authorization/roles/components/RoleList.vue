@@ -24,7 +24,7 @@ const modelProxy = computed({
 </script>
 <template>
     <RadioGroup v-model="modelProxy" class="cursor-pointer">
-        <Item v-for="role in roles" :key="role.id" class="bg-input p-0">
+        <Item v-for="role in roles" :key="role.id" class="bg-input p-0 border-border">
             <Label :for="role.name" class="cursor-pointer p-4 flex justify-between items-center w-full">
                 <ItemContent>
                     <ItemTitle>{{ role.name }}</ItemTitle>

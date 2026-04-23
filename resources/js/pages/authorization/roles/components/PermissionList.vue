@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Item, ItemContent, ItemGroup, ItemTitle } from '@/components/ui/item';
 import ItemActions from '@/components/ui/item/ItemActions.vue';
 import { Label } from '@/components/ui/label';
-import { dashboardPermisions, medicalRecordPermissions, registrationPermissions, rolePermissions, userPermissions } from '@/constant/permission';
+import { dashboardPermisions, medicalRecordPermissions, patientPermissions, practitionerPermissions, registrationPermissions, rolePermissions, userPermissions } from '@/constant/permission';
 import { Permission } from '@/types';
 import { computed, ref } from 'vue';
 
@@ -17,11 +17,13 @@ const permissionNames = computed(() => {
 const selectedPermissions = ref<string[]>([...permissionNames.value]);
 
 const permissionList = {
+    Dashboard: dashboardPermisions,
+    'Manajemen Peran': rolePermissions,
+    'Manajemen User': userPermissions,
+    'Manajemen Praktisi': practitionerPermissions,
+    'Manajemen Pasien': patientPermissions,
     'Rekam Medis': medicalRecordPermissions,
     Antrian: registrationPermissions,
-    Dashboard: dashboardPermisions,
-    'Manajemen User': userPermissions,
-    'Manajemen Peran': rolePermissions
 };
 
 const onCheck = (key: string) => {
@@ -42,7 +44,7 @@ const emit = defineEmits<{
 <template>
     <ItemGroup v-for="[name, permissions] in Object.entries(permissionList)" :key="name" class="flex flex-col gap-4 rounded border p-8">
         {{ name }}
-        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission" class="bg-input p-0">
+        <Item v-for="[permission, label] in Object.entries(permissions)" :key="permission" class="bg-input border-border p-0">
             <Label :for="label" class="w-full flex items-center cursor-pointer p-4">
             <ItemContent>
                     <ItemTitle >
@@ -55,7 +57,7 @@ const emit = defineEmits<{
                     :default-checked="permissionNames.includes(permission)"
                     :value="permission"
                     @update:checked="() => onCheck(permission)"
-                    class="bg-background"
+                    class="bg-background border-border"
                     />
                 </ItemActions>
             </Label>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Auth\UpdateUserRequest;
 use App\Models\User;
+use App\Queries\UserQueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -13,11 +14,11 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UserQueryBuilder $query)
     {
         $this->authorize('viewAny', User::class);
         return Inertia::render('auth/Index', [
-            'users' => User::with('roles')->paginate(10)
+            'users' => $query->paginate(10)
         ]);
     }
 

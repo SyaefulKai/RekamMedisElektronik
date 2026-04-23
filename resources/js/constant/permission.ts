@@ -32,12 +32,28 @@ export const dashboardPermisions = {
   'view.dashboard': 'Lihat Dashboard',
 }
 
+export const patientPermissions = {
+    'view.patient': 'Lihat Pasien',
+    'create.patient': 'Tambah Pasien',
+    'update.patient': 'Edit Pasien',
+    'delete.patient': 'Hapus Pasien'
+}
+
+export const practitionerPermissions = {
+    'view.practitioner': 'Lihat Praktisi',
+    'create.practitioner': 'Daftarkan Praktisi',
+    'update.practitioner': 'Edit Praktisi',
+    'delete.practitioner': 'Hapus Praktisi'
+}
+
 export const permissions = {
     ...medicalRecordPermissions,
     ...registrationPermissions,
     ...userPermissions,
     ...rolePermissions,
-    ...dashboardPermisions
+    ...dashboardPermisions,
+    ...patientPermissions,
+    ...practitionerPermissions
 } as const
 
 export const PermissionKey = Object.keys(permissions) as PermissionKeyType[]

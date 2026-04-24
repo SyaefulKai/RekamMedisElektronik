@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Resources\Encounter;
 use App\Models\Resources\Patient;
 use App\Models\Resources\Practitioner;
 use App\Observers\QueueObserver;
@@ -27,5 +28,10 @@ class Queue extends Model
     public function practitioner()
     {
         return $this->belongsTo(Practitioner::class);
+    }
+
+    public function encounter()
+    {
+        return $this->hasOne(Encounter::class);
     }
 }

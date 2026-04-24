@@ -1,3 +1,5 @@
+import { index, store } from "@/actions/App/Http/Controllers/Resources/EncounterController";
+import LinkButton from "@/components/LinkButton.vue";
 import Badge from "@/components/ui/badge/Badge.vue";
 import { Queue, QueueStatus } from "@/types/queue";
 import { ColumnDef } from "@tanstack/vue-table";
@@ -48,6 +50,44 @@ export const QueueColumn: ColumnDef<Queue>[] = [
                     class: badge.class
                 }, badge.text)
             }
+        }
+    },
+    {
+        header: 'Aksi',
+        cell: ({ row }) => {
+            const status = row.original.status as QueueStatus
+
+            const buttonProps: Record<QueueStatus, any> = {
+                planned: {
+                    method: 'post',
+                    href: store().url,
+                    data: {
+                        patient_id: row.original.patient.id,
+                        practitioner_id: row.original.practitioner.user.id,
+                        queue_id: row.original.id
+                    }
+                },
+                'in-progress': {
+                    method: 'get',
+                    href: index({
+                        encounter: row.original.encounter.uuid
+                    }).url,
+                    data: {}
+                },
+                finished: null,
+                cancelled: null
+            }
+
+            const config = buttonProps[status]
+
+            return config
+                ? h(LinkButton, {
+                    href: config.href,
+                    method: config.method,
+                    label: 'Rekam Medis',
+                    data: config.data
+                })
+                : null
         }
     }
 ]

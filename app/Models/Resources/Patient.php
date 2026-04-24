@@ -42,4 +42,9 @@ class Patient extends Model
     {
         return $this->hasMany(Queue::class);
     }
+
+    public function encounters()
+    {
+        return $this->hasMany(Encounter::class);
+    }
 }

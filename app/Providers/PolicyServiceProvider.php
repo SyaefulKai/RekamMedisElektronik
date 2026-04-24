@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Resources\Encounter;
 use App\Models\Resources\Practitioner;
 use App\Models\User;
+use App\Policies\EncounterPolicy;
 use App\Policies\PractitionerPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -29,5 +31,6 @@ class PolicyServiceProvider extends ServiceProvider
         Gate::policy(Role::class, RolePolicy::class);
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Practitioner::class, PractitionerPolicy::class);
+        Gate::policy(Encounter::class, EncounterPolicy::class);
     }
 }

@@ -17,7 +17,8 @@ class QueueController extends Controller
         return Inertia::render('queue/Index', [
             'queues' => Queue::with([
                 'patient',
-                'practitioner.user'
+                'practitioner.user',
+                'encounter'
             ])
                 ->whereDate('date', today())
                 ->paginate(10)

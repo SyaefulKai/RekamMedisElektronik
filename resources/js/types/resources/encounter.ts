@@ -12,5 +12,5 @@ export type Encounter = {
     id: number,
     uuid: string,
     status: EncounterStatus,
-    date: string
+    date: string,
 }

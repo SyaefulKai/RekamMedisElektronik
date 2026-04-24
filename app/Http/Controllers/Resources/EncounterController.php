@@ -12,7 +12,7 @@ class EncounterController extends Controller
     public function index(Encounter $encounter)
     {
         return Inertia::render('encounter/Index', [
-            'encounter' => $encounter,
+            'encounter' => $encounter->load('patient'),
         ]);
     }
 

@@ -11,7 +11,9 @@ const AllergySchema = z.object({
 
 export const SubjectiveSchema = z.object({
     chief_complaint: z.string().nullable().optional(),
-    anamnesis: z.string().nullable().optional(),
+    history_of_present_illness: z.string().nullable().optional(),
+    past_medical_history: z.string().nullable().optional(),
+    family_medical_history: z.string().nullable().optional(),
     allergies: z.array(AllergySchema).nullable().optional(),
 })
 

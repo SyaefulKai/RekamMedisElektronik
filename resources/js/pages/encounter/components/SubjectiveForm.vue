@@ -12,7 +12,7 @@ import { useForm, Field as VeeField } from 'vee-validate';
 import { inject, Ref, watch } from 'vue';
 import { toast } from 'vue-sonner';
 
-const page = usePage()
+const page = usePage();
 
 const schema = toTypedSchema(SubjectiveSchema);
 
@@ -22,7 +22,9 @@ const form = useForm({
     validationSchema: schema,
     initialValues: {
         chief_complaint: encounter?.value?.subjective?.chief_complaint,
-        anamnesis: encounter?.value?.subjective?.anamnesis,
+        history_of_present_illness: encounter?.value?.subjective?.history_of_present_illness,
+        past_medical_history: encounter?.value?.subjective?.past_medical_history,
+        family_medical_history: encounter?.value?.subjective?.family_medical_history,
         allergies: encounter?.value?.subjective?.allergies,
     },
 });
@@ -37,7 +39,7 @@ const submit = form.handleSubmit((val: SubjectiveSchemaType) => {
         {
             onError: (errors) => form.setErrors(errors),
             onSuccess: () => {
-                if(page.flash)  toast.success(page.flash.subjectiveCreated as string)
+                if (page.flash) toast.success(page.flash.subjectiveCreated as string);
             },
             only: ['encounter'],
         },
@@ -50,7 +52,9 @@ watch(
         form.resetForm({
             values: {
                 chief_complaint: subjective?.chief_complaint,
-                anamnesis: subjective?.anamnesis,
+                history_of_present_illness: subjective?.history_of_present_illness,
+                past_medical_history: subjective?.past_medical_history,
+                family_medical_history: subjective?.family_medical_history,
                 allergies: subjective?.allergies,
             },
         });
@@ -81,15 +85,57 @@ watch(
                 />
             </Field>
         </VeeField>
-        <VeeField name="anamnesis" v-slot="{ field, errors }">
+        <VeeField name="history_of_present_illness" v-slot="{ field, errors }">
             <Field>
-                <FieldLabel>Anamnesa</FieldLabel>
+                <FieldLabel>Detail Keluhan</FieldLabel>
                 <FieldContent>
                     <Textarea
                         :model-value="field.value"
                         @update:model-value="field.onChange"
                         class="border border-border"
                         placeholder="Tuliskan riwayat keluhan, sejak kapan, lokasi, durasi, faktor pencetus/peringan, dan gejala penyerta."
+                    />
+                </FieldContent>
+                <FieldError
+                    v-if="errors.length"
+                    :errors="
+                        errors.map((err) => ({
+                            message: err,
+                        }))
+                    "
+                />
+            </Field>
+        </VeeField>
+        <VeeField name="past_medical_history" v-slot="{ field, errors }">
+            <Field>
+                <FieldLabel>Riwayat Medis</FieldLabel>
+                <FieldContent>
+                    <Textarea
+                        :model-value="field.value"
+                        @update:model-value="field.onChange"
+                        class="border border-border"
+                        placeholder="Tuliskan riwayat medis yang pernah dialami oleh pasien."
+                    />
+                </FieldContent>
+                <FieldError
+                    v-if="errors.length"
+                    :errors="
+                        errors.map((err) => ({
+                            message: err,
+                        }))
+                    "
+                />
+            </Field>
+        </VeeField>
+        <VeeField name="family_medical_history" v-slot="{ field, errors }">
+            <Field>
+                <FieldLabel>Riwayat Medis Keluarga</FieldLabel>
+                <FieldContent>
+                    <Textarea
+                        :model-value="field.value"
+                        @update:model-value="field.onChange"
+                        class="border border-border"
+                        placeholder="Tuliskan riwayat penyakit yang pernah dialami oleh keluarga pasien."
                     />
                 </FieldContent>
                 <FieldError

@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('subjectives', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('encounter_id');
+            $table->foreignId('encounter_id')->constrained()->cascadeOnDelete();
             $table->string('chief_complaint')->nullable();
-            $table->string('anamnesis')->nullable();
+            $table->text('history_of_present_illness')->nullable();
+            $table->text('past_medical_history')->nullable();
+            $table->text('family_medical_history')->nullable();
             $table->json('allergies')->nullable();
             $table->timestamps();
         });

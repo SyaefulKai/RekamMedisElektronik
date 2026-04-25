@@ -49,7 +49,9 @@ export type Encounter = {
 export type Subjective = {
     encounter: Encounter,
     chief_complaint: string,
-    anamnesis: string,
+    history_of_present_illness: string,
+    past_medical_history: string,
+    family_medical_history: string,
     allergies: Allergy[]
 }
 

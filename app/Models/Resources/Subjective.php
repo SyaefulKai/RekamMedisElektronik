@@ -10,7 +10,9 @@ class Subjective extends Model
     protected $fillable = [
         'encounter_id',
         'chief_complaint',
-        'anamnesis',
+        'history_of_present_illness',
+        'past_medical_history',
+        'family_medical_history',
         'allergies',
     ];
 

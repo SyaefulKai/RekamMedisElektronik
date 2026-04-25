@@ -27,7 +27,15 @@ class CreateSubjectiveRequest extends FormRequest
                 'nullable',
                 'string'
             ],
-            'anamnesis' => [
+            'history_of_present_illness' => [
+                'nullable',
+                'string'
+            ],
+            'past_medical_history' => [
+                'nullable',
+                'string'
+            ],
+            'family_medical_history' => [
                 'nullable',
                 'string'
             ],

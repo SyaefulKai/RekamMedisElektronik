@@ -44,6 +44,8 @@ class QueueController extends Controller
             'practitioner_id' => $data['practitioner_id'],
         ]);
 
-        return redirect()->route('queue.index');
+        Inertia::flash('queueCreated', 'Antrian berhasil dibuat.');
+
+        return to_route('queue.index');
     }
 }

@@ -41,7 +41,8 @@ class RoleController extends Controller
             'name' => $data['name'],
         ]);
         $role->syncPermissions($data['permissions'] ?? []);
-        return redirect()->to(route('role.index'));
+        Inertia::flash('roleCreated', "Data peran beserta izinnya berhasil disimpan");
+        return to_route('role.index');
     }
 
     public function update(UpdatePermissionRequest $request)
@@ -50,6 +51,7 @@ class RoleController extends Controller
         $role = Role::findById($data['role']);
         $this->authorize('update', $role);
         $role->syncPermissions($data['permissions']);
+        Inertia::flash('roleUpdated', 'Data peran dan izinnya berhasil diperbarui');
         return redirect()->back();
     }
 
@@ -57,6 +59,7 @@ class RoleController extends Controller
     {
         $this->authorize('delete', $role);
         $role->delete();
+        Inertia::flash('roleDeleted', 'Data peran berhasil dihapus.');
         return redirect()->back();
     }
 }

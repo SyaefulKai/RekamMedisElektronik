@@ -30,7 +30,8 @@ class PatientController extends Controller
     {
         $data = $request->validated();
         Patient::create($data);
-        return redirect()->to(route('patient.index'));
+        Inertia::flash('patientCreated', 'Data pasien berhasil ditambahkan.');
+        return to_route('patient.index');
     }
 
     public function edit(Patient $patient)
@@ -44,6 +45,7 @@ class PatientController extends Controller
     {
         $data = $request->validated();
         $patient->update($data);
+        Inertia::flash('patientUpdated', 'Data pasien berhasil diperbarui.');
         return redirect()->to(route('patient.index'));
     }
 

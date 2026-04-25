@@ -10,6 +10,8 @@ import { useDebounceFn } from '@vueuse/core';
 import { UserColumn } from './columns/user-column';
 import LinkButton from '@/components/LinkButton.vue';
 import { create } from '@/actions/App/Http/Controllers/Auth/UserController';
+import { onUnmounted } from 'vue';
+import { toast } from 'vue-sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -43,6 +45,16 @@ const handleSearch = useDebounceFn((value) => {
 }, 500);
 
 const column = UserColumn;
+
+const flashEvent = router.on('flash', (flashProps) => {
+    const flashMessage = flashProps.detail.flash
+    if(flashMessage.practitionerCreated) toast.success(flashMessage.practitionerCreated as string)
+    if(flashMessage.userCreated) toast.success(flashMessage.userCreated as string)
+    if(flashMessage.userUpdated) toast.success(flashMessage.userUpdated as string)
+    if(flashMessage.userDeleted) toast.success(flashMessage.userDeleted as string)
+})
+
+onUnmounted(() => flashEvent())
 </script>
 
 <template>

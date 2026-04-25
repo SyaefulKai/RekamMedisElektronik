@@ -8,6 +8,7 @@ use App\Models\Resources\Encounter;
 use App\Models\Resources\Subjective;
 use App\Services\EncounterService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SubjectiveController extends Controller
 {
@@ -16,9 +17,10 @@ class SubjectiveController extends Controller
         CreateSubjectiveRequest $request,
         EncounterService $service
     ) {
-        $this->authorize('update', Encounter::class);
+        $this->authorize('update', $encounter);
         $data = $request->validated();
         $service->storeSubjective($encounter, $data);
+        Inertia::flash('subjectiveCreated', 'Data subjektif berhasil disimpan.');
         return redirect()->back();
     }
 }

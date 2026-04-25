@@ -12,7 +12,10 @@ class EncounterController extends Controller
     public function index(Encounter $encounter)
     {
         return Inertia::render('encounter/Index', [
-            'encounter' => $encounter->load('patient'),
+            'encounter' => $encounter->load([
+                'patient',
+                'subjective'
+            ]),
         ]);
     }
 
@@ -20,10 +23,12 @@ class EncounterController extends Controller
     {
         $this->authorize('create', Encounter::class);
         $data = $request->validated();
-        Encounter::create([
+        $encounter = Encounter::create([
             ...$data,
             'date' => now()
         ]);
-        return redirect()->to(route('encounter.index'));
+        return redirect()->to(route('encounter.index', [
+            'encounter' => $encounter->uuid
+        ]));
     }
 }

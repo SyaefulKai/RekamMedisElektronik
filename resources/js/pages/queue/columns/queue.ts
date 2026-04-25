@@ -70,7 +70,7 @@ export const QueueColumn: ColumnDef<Queue>[] = [
                 'in-progress': {
                     method: 'get',
                     href: index({
-                        encounter: row.original.encounter.uuid
+                        encounter: row.original.encounter?.uuid ?? ''
                     }).url,
                     data: {}
                 },

@@ -5,13 +5,11 @@ import EncounterTabs from '@/pages/encounter/components/EncounterTabs.vue';
 import PatientDetail from '@/pages/encounter/components/PatientDetail.vue';
 import { BreadcrumbItem } from '@/types';
 import { Encounter } from '@/types/resources/encounter';
-import { Patient } from '@/types/resources/patient';
 import { Head } from '@inertiajs/vue3';
+import { provide, toRef } from 'vue';
 
 const props = defineProps<{
-    encounter: Encounter & {
-        patient: Patient
-    }
+    encounter: Encounter
 }>()
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -22,13 +20,15 @@ const breadcrumbs: BreadcrumbItem[] = [
         }).url
     }
 ]
+
+provide('encounter', toRef(props, 'encounter'))
 </script>
 
 <template>
     <Head title="Rekam Medis"/>
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-8 flex flex-col gap-4">
-            <PatientDetail :patient="encounter.patient"/>
+            <PatientDetail v-if="encounter.patient" :patient="encounter.patient"/>
             <EncounterTabs />
         </div>
     </AppLayout>

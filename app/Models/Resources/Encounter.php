@@ -36,6 +36,11 @@ class Encounter extends Model
         return $this->belongsTo(Queue::class);
     }
 
+    public function subjective()
+    {
+        return $this->hasOne(Subjective::class);
+    }
+
     public function uniqueIds(): array
     {
         return [

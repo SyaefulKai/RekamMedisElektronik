@@ -92,3 +92,15 @@ export const ObjectiveSchema = z.object({
 
 export type VitalSigns = z.infer<typeof vitalSignsSchema>;
 export type ObjectiveSchemaType = z.infer<typeof ObjectiveSchema>;
+
+export const Icd10Schema = z.object({
+    id: z.coerce.number(),
+    display: z.coerce.string(),
+})
+
+export const AssessmentSchema = z.object({
+    icd10s: Icd10Schema,
+})
+
+export type AssessmentSchemaType = z.infer<typeof AssessmentSchema>
+export type Icd10SchemaType = z.infer<typeof Icd10Schema>

@@ -11,4 +11,9 @@ class Icd10 extends Model
         'icd10_en',
         'icd10_id'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

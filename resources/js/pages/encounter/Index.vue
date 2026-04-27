@@ -3,13 +3,14 @@ import { index } from '@/actions/App/Http/Controllers/Resources/EncounterControl
 import AppLayout from '@/layouts/AppLayout.vue';
 import EncounterTabs from '@/pages/encounter/components/EncounterTabs.vue';
 import PatientDetail from '@/pages/encounter/components/PatientDetail.vue';
-import { BreadcrumbItem } from '@/types';
-import { Encounter } from '@/types/resources/encounter';
+import { BreadcrumbItem, Pagination } from '@/types';
+import { Encounter, Icd10 } from '@/types/resources/encounter';
 import { Head } from '@inertiajs/vue3';
 import { provide, toRef } from 'vue';
 
 const props = defineProps<{
-    encounter: Encounter
+    encounter: Encounter,
+    icd10s: Pagination<Icd10>
 }>()
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -22,6 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ]
 
 provide('encounter', toRef(props, 'encounter'))
+provide('icd10s', props.icd10s.data)
 </script>
 
 <template>

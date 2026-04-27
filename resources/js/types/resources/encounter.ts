@@ -65,3 +65,9 @@ export type Allergy = {
     severity?: AllergySeverity,
     manifestation?: string,
 }
+
+export type Icd10 = {
+    id: number,
+    icd10_en: string,
+    icd10_id: string
+}

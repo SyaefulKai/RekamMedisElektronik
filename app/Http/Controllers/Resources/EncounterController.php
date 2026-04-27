@@ -14,7 +14,8 @@ class EncounterController extends Controller
         return Inertia::render('encounter/Index', [
             'encounter' => $encounter->load([
                 'patient',
-                'subjective'
+                'subjective',
+                'objective'
             ]),
         ]);
     }

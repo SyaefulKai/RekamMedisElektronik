@@ -1,3 +1,4 @@
+import { ObjectiveSchemaType } from "@/schemas/encounter"
 import { Patient } from "@/types/resources/patient"
 
 export const EncounterStatus = {
@@ -43,6 +44,7 @@ export type Encounter = {
     status: EncounterStatus,
     date: string,
     subjective?: Subjective,
+    objective?: ObjectiveSchemaType,
     patient?: Patient
 }
 

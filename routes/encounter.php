@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Resources\EncounterController;
+use App\Http\Controllers\Resources\ObjectiveController;
 use App\Http\Controllers\Resources\SubjectiveController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,5 +11,9 @@ Route::middleware('auth')->prefix('encounters')->group(function() {
 
     Route::prefix('/{encounter:uuid}/subjectives')->group(function() {
         Route::post('/', [SubjectiveController::class, 'store'])->name('subjective.store');
+    });
+
+    Route::prefix('/{encounter:uuid}/objectives')->group(function() {
+        Route::post('/', [ObjectiveController::class, 'store'])->name('objective.store');
     });
 });

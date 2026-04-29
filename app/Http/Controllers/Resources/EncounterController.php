@@ -19,7 +19,8 @@ class EncounterController extends Controller
             'encounter' => $encounter->load([
                 'patient',
                 'subjective',
-                'objective'
+                'objective',
+                'assessment.icd10s'
             ]),
             'icd10s' => $icd10->paginate(10),
         ]);

@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { Icd10 } from '@/types/resources/encounter';
-import { inject } from 'vue';
+import DataTable from '@/components/ui/datatable/DataTable.vue';
+import { Icd10Column } from '@/pages/encounter/columns/assessment-column';
+import DiagnosisDialog from '@/pages/encounter/components/DiagnosisDialog.vue';
+import { Encounter } from '@/types/resources/encounter';
+import { inject, Ref } from 'vue';
 
-const icd10s = inject<Icd10[]>('icd10s')
+const encounter = inject<Ref<Encounter>>('encounter')
 
 </script>
 
 <template>
-    <p>{{ icd10s }}</p>
+    <div>
+        <div class="flex justify-end">
+            <DiagnosisDialog />
+        </div>
+        <DataTable :columns="Icd10Column" :pagination="encounter?.assessment?.icd10s ?? []"/>
+    </div>
 </template>

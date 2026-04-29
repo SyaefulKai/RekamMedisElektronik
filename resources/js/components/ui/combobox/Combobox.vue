@@ -43,7 +43,7 @@ const search = (val: Event) => {
         variant="outline"
         role="combobox"
         :aria-expanded="open"
-        class="w-[200px] justify-between"
+        class="justify-between"
       >
         {{
           value
@@ -53,7 +53,7 @@ const search = (val: Event) => {
         <ChevronsUpDownIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
-    <PopoverContent class="w-[200px] p-0">
+    <PopoverContent class="p-0">
       <Command>
         <CommandInput :placeholder="placeholder ?? 'Placeholder'" @input="search"/>
         <CommandList>

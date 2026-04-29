@@ -17,18 +17,46 @@ import {
 import { Pagination } from '@/types';
 import { router } from '@inertiajs/vue3';
 import DataTablePagination from '@/components/ui/datatable/DataTablePagination.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     columns: ColumnDef<TData, TValue>[]
-    pagination: Pagination<TData>
+    pagination: Pagination<TData> | TData[]
 }>()
 
 const loading = ref(false)
 
+const isPagination = (val: Pagination<TData> | TData[]): val is Pagination<TData> => {
+    return !Array.isArray(val)
+}
+
+const tableData = computed(() =>
+    isPagination(props.pagination)
+        ? props.pagination.data
+        : props.pagination
+)
+
+const rowCount = computed(() =>
+    isPagination(props.pagination)
+        ? props.pagination.total
+        : props.pagination.length
+)
+
+const pageIndex = computed(() =>
+    isPagination(props.pagination)
+        ? props.pagination.current_page - 1
+        : 0
+)
+
+const pageSize = computed(() =>
+    isPagination(props.pagination)
+        ? props.pagination.per_page
+        : props.pagination.length
+)
+
 const table = useVueTable({
     get data() {
-        return props.pagination.data
+        return tableData.value
     },
     get columns() {
         return props.columns
@@ -36,17 +64,19 @@ const table = useVueTable({
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     get rowCount() {
-        return props.pagination.total
+        return rowCount.value
     },
     state: {
         get pagination() {
             return {
-                pageIndex: props.pagination.current_page - 1,
-                pageSize: props.pagination.per_page,
+                pageIndex: pageIndex.value,
+                pageSize: pageSize.value,
             }
         }
     },
     onPaginationChange: (updater) => {
+        if (!isPagination(props.pagination)) return
+
         const next =
             typeof updater === 'function'
                 ? updater(table.getState().pagination)
@@ -96,7 +126,8 @@ const table = useVueTable({
                 </TableBody>
             </Table>
         </div>
-        <div class="mt-4">
+
+        <div v-if="isPagination(pagination)" class="mt-4">
             <DataTablePagination :table="table" :loading="loading" />
         </div>
     </div>

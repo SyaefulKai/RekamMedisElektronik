@@ -46,6 +46,11 @@ class Encounter extends Model
         return $this->hasOne(Objective::class);
     }
 
+    public function assessment()
+    {
+        return $this->hasOne(Assessment::class);
+    }
+
     public function uniqueIds(): array
     {
         return [

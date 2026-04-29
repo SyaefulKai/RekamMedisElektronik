@@ -45,6 +45,7 @@ export type Encounter = {
     date: string,
     subjective?: Subjective,
     objective?: ObjectiveSchemaType,
+    assessment?: Assessment,
     patient?: Patient
 }
 
@@ -68,6 +69,12 @@ export type Allergy = {
 
 export type Icd10 = {
     id: number,
+    icd10_code: string,
     icd10_en: string,
     icd10_id: string
+}
+
+export type Assessment = {
+    id: number,
+    icd10s: Icd10[],
 }

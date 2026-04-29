@@ -5,7 +5,8 @@ import EncounterTabs from '@/pages/encounter/components/EncounterTabs.vue';
 import PatientDetail from '@/pages/encounter/components/PatientDetail.vue';
 import { BreadcrumbItem, Pagination } from '@/types';
 import { Encounter, Icd10 } from '@/types/resources/encounter';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
+import { useDebounceFn } from '@vueuse/core';
 import { provide, toRef } from 'vue';
 
 const props = defineProps<{
@@ -22,8 +23,25 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ]
 
+const searchIcd10 = useDebounceFn((value: string) => {
+    router.get(index({
+        encounter: props.encounter.uuid
+    }).url, {
+        filter: {
+            icd10_query: value
+        },
+    }, {
+        preserveState: true,
+        preserveScroll: true,
+        only: [
+            'icd10s'
+        ]
+    })
+}, 500)
+
 provide('encounter', toRef(props, 'encounter'))
-provide('icd10s', props.icd10s.data)
+provide('icd10s', toRef(props, 'icd10s'))
+provide('icd10_search', searchIcd10)
 </script>
 
 <template>

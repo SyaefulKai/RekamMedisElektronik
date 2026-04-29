@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Resources\AssessmentController;
 use App\Http\Controllers\Resources\EncounterController;
 use App\Http\Controllers\Resources\ObjectiveController;
 use App\Http\Controllers\Resources\SubjectiveController;
@@ -15,5 +16,9 @@ Route::middleware('auth')->prefix('encounters')->group(function() {
 
     Route::prefix('/{encounter:uuid}/objectives')->group(function() {
         Route::post('/', [ObjectiveController::class, 'store'])->name('objective.store');
+    });
+
+    Route::prefix('/{encounter:uuid}/assessments')->group(function() {
+        Route::post('/', [AssessmentController::class, 'store'])->name('assessment.store');
     });
 });

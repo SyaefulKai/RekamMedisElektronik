@@ -94,13 +94,12 @@ export type VitalSigns = z.infer<typeof vitalSignsSchema>;
 export type ObjectiveSchemaType = z.infer<typeof ObjectiveSchema>;
 
 export const Icd10Schema = z.object({
-    id: z.coerce.number(),
-    display: z.coerce.string(),
+    diagnosis_type: z.enum([
+        'primary',
+        'secondary'
+    ]),
+    icd10: z.coerce.number()
 })
 
-export const AssessmentSchema = z.object({
-    icd10s: Icd10Schema,
-})
-
-export type AssessmentSchemaType = z.infer<typeof AssessmentSchema>
 export type Icd10SchemaType = z.infer<typeof Icd10Schema>
+

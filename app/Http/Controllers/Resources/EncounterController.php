@@ -4,25 +4,24 @@ namespace App\Http\Controllers\Resources;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resources\Encounter\CreateEncounterRequest;
-use App\Models\Icd10;
 use App\Models\Resources\Encounter;
-use App\Queries\Icd10QueryBuilder;
+use App\Services\Diagnosis\DiagnosisSearchService;
 use Inertia\Inertia;
 
 class EncounterController extends Controller
 {
     public function index(
         Encounter $encounter,
-        Icd10QueryBuilder $icd10,
+        DiagnosisSearchService $diagnosis_search
     ) {
         return Inertia::render('encounter/Index', [
             'encounter' => $encounter->load([
                 'patient',
                 'subjective',
                 'objective',
-                'assessment.icd10s'
+                'assessment.assessmentDiagnoses'
             ]),
-            'icd10s' => $icd10->paginate(10),
+            'diagnosis_codes' => $diagnosis_search->search(10)
         ]);
     }
 

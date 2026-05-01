@@ -2,19 +2,19 @@
 
 namespace App\Queries;
 
+use App\Enums\DiagnosisSystem;
 use App\Models\Icd10;
+use App\Services\Diagnosis\Contracts\DiagnosisSearch;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class Icd10QueryBuilder
+class Icd10QueryBuilder implements DiagnosisSearch
 {
-    public function paginate(int $perPage)
+    public function search(int $limit)
     {
-        $query = Icd10::query();
-
-        return QueryBuilder::for($query)
+        return QueryBuilder::for(Icd10::query())
             ->allowedFilters(
-                AllowedFilter::callback('icd10_query', function ($query, $value) {
+                AllowedFilter::callback('query', function ($query, $value) {
                     $query->where(function ($q) use ($value) {
                         $q->where('icd10_en', 'LIKE', "%{$value}%")
                             ->orWhere('icd10_id', 'LIKE', "%{$value}%")
@@ -22,7 +22,12 @@ class Icd10QueryBuilder
                     });
                 })
             )
-            ->paginate($perPage)
-            ->withQueryString();
+            ->limit($limit)
+            ->get()
+            ->map(fn($value) => [
+                'code'    => $value->icd10_code,
+                'system'  => DiagnosisSystem::ICD10,
+                'display' => $value->icd10_id,
+            ]);
     }
 }

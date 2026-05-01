@@ -112,7 +112,7 @@ const submit = form.handleSubmit((val: AddDiagnosisSchemaType) => {
                     </Field>
                 </VeeField>
                 <Field>
-                    <FieldLabel>Status Diagnosa</FieldLabel>
+                    <FieldLabel>Kode Diagnosa</FieldLabel>
                     <FieldContent>
                         <RekaCombobox
                             v-model="form.values.code"

@@ -3,6 +3,7 @@
 namespace App\Models\Resources;
 
 use App\Models\Queue;
+use App\Models\Resources\Assessments\Assessment;
 use App\Observers\EncounterObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

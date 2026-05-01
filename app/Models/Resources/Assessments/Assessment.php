@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Resources;
+namespace App\Models\Resources\Assessments;
 
-use App\Models\Icd10;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\Resources\Assessments\AssessmentDiagnosis;
+use App\Models\Resources\Encounter;
 use Illuminate\Database\Eloquent\Model;
 
 class Assessment extends Model
@@ -19,8 +19,8 @@ class Assessment extends Model
         return $this->belongsTo(Encounter::class);
     }
 
-    public function icd10s()
+    public function assessmentDiagnoses()
     {
-        return $this->belongsToMany(Icd10::class, 'assessment_diagnoses', 'assessment_id', 'icd10_id');
+        return $this->hasMany(AssessmentDiagnosis::class);
     }
 }

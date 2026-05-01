@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Resources\Encounter;
 
 use App\Enums\DiagnosisRole;
+use App\Enums\DiagnosisStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -25,17 +26,26 @@ class CreateAssessmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icd10s' => [
+            'diagnoses' => [
                 'nullable',
                 'array'
             ],
-            'icd10s.*.diagnosis_type' => [
+            'diagnoses.*.diagnosis_role' => [
                 'required',
                 Rule::enum(DiagnosisRole::class),
             ],
-            'icd10s.*.icd10' => [
+            'diagnoses.*.diagnosis_status' => [
                 'required',
-                'exists:icd10s,id'
+                Rule::enum(DiagnosisStatus::class),
+            ],
+            'diagnoses.*.code' => [
+                'required',
+            ],
+            'diagnoses.*.system' => [
+                'required'
+            ],
+            'diagnoses.*.display' => [
+                'required',
             ]
         ];
     }

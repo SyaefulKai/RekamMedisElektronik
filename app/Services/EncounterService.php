@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\Resources\Encounter\CreateSubjectiveRequest;
-use App\Models\Resources\Assessment;
+use App\Models\Resources\Assessments\Assessment;
 use App\Models\Resources\Encounter;
 use App\Models\Resources\Objective;
 use App\Models\Resources\Subjective;
@@ -33,19 +33,20 @@ class EncounterService
             $data
         );
 
-        $this->storeAssessmentDiagnosis($assessment, $data['icd10s']);
+        $this->storeAssessmentDiagnosis($assessment, $data['diagnoses']);
         return $assessment;
     }
 
     public function storeAssessmentDiagnosis(Assessment $assessment, array $data)
     {
-        foreach ($data as $icd10) {
-            $assessment->icd10s()->attach(
-                $icd10['icd10'],
-                [
-                    'diagnosis_type' => $icd10['diagnosis_type']
-                ]
-            );
+        foreach ($data as $diagnosis) {
+            $assessment->assessmentDiagnoses()->create([
+                'diagnosis_role' => $diagnosis['diagnosis_role'],
+                'diagnosis_status' => $diagnosis['diagnosis_status'],
+                'code' => $diagnosis['code'],
+                'system' => $diagnosis['system'],
+                'display' => $diagnosis['display'],
+            ]);
         }
     }
 }

@@ -1,3 +1,4 @@
+import { DiagnosisRole, DiagnosisStatus } from "@/constant/assessment";
 import { z } from "zod";
 
 const AllergySchema = z.object({
@@ -93,13 +94,12 @@ export const ObjectiveSchema = z.object({
 export type VitalSigns = z.infer<typeof vitalSignsSchema>;
 export type ObjectiveSchemaType = z.infer<typeof ObjectiveSchema>;
 
-export const Icd10Schema = z.object({
-    diagnosis_type: z.enum([
-        'primary',
-        'secondary'
-    ]),
-    icd10: z.coerce.number()
+export const AddDiagnosisSchema = z.object({
+    diagnosis_role: z.enum(Object.values(DiagnosisRole) as [string, ...string[]]),
+    diagnosis_status: z.enum(Object.values(DiagnosisStatus) as [string, ...string[]]),
+    code: z.string(),
+    display: z.string(),
+    system: z.string()
 })
 
-export type Icd10SchemaType = z.infer<typeof Icd10Schema>
-
+export type AddDiagnosisSchemaType = z.infer<typeof AddDiagnosisSchema>

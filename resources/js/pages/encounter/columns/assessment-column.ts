@@ -1,17 +1,25 @@
-import { Icd10 } from "@/types/resources/encounter";
+import { AssessmentDiagnosis } from "@/types/resources/encounter";
 import { ColumnDef } from "@tanstack/vue-table";
 
-export const Icd10Column: ColumnDef<Icd10>[] = [
+export const Icd10Column: ColumnDef<AssessmentDiagnosis>[] = [
     {
         header: 'Nomor',
-        cell: ({row}) => row.index + 1
+        cell: ({ row }) => row.index + 1
     },
     {
-        accessorKey: 'icd10_code',
+        header: 'Peran Diagnosa',
+        accessorKey: 'diagnosis_role'
+    },
+    {
+        header: 'Status Diagnosa',
+        accessorKey: 'diagnosis_status'
+    },
+    {
         header: 'Kode Diagnosa',
+        accessorKey: 'code'
     },
     {
-        accessorKey: 'icd10_id',
-        header: 'Deskripsi Diagnosa',
+        header: 'Detail Diagnosa',
+        accessorKey: 'display'
     }
 ]

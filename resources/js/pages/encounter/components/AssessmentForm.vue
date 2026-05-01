@@ -14,6 +14,6 @@ const encounter = inject<Ref<Encounter>>('encounter')
         <div class="flex justify-end">
             <DiagnosisDialog />
         </div>
-        <DataTable :columns="Icd10Column" :pagination="encounter?.assessment?.icd10s ?? []"/>
+        <DataTable :columns="Icd10Column" :pagination="encounter?.assessment?.assessment_diagnoses ?? []"/>
     </div>
 </template>

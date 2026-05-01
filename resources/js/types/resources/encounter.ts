@@ -1,3 +1,4 @@
+import { DiagnosisRole, DiagnosisStatus, DiagnosisSystem } from "@/constant/assessment"
 import { ObjectiveSchemaType } from "@/schemas/encounter"
 import { Patient } from "@/types/resources/patient"
 
@@ -76,5 +77,20 @@ export type Icd10 = {
 
 export type Assessment = {
     id: number,
-    icd10s: Icd10[],
+    assessment_diagnoses: AssessmentDiagnosis[]
+}
+
+export type AssessmentDiagnosis = {
+    id: number,
+    diagnosis_role: DiagnosisRole,
+    diagnosis_status: DiagnosisStatus,
+    code: string,
+    system: string,
+    display: string,
+}
+
+export type DiagnosisCode = {
+    code: string,
+    display: string,
+    system: DiagnosisSystem
 }

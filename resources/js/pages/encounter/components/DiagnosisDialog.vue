@@ -1,59 +1,71 @@
 <script setup lang="ts">
+import { store } from '@/actions/App/Http/Controllers/Resources/AssessmentController';
 import { Button } from '@/components/ui/button';
 import { Combobox, RekaCombobox } from '@/components/ui/combobox';
 import { Dialog, DialogDescription, DialogHeader, DialogScrollContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Field, FieldContent, FieldError, FieldLabel } from '@/components/ui/field';
-import { DiagnosisRole } from '@/constant/assessment';
-import { Icd10Schema, Icd10SchemaType } from '@/schemas/encounter';
-import { Pagination } from '@/types';
-import { Encounter, Icd10 } from '@/types/resources/encounter';
+import { DiagnosisRole, DiagnosisRoleLabel, DiagnosisStatus, DiagnosisStatusLabel } from '@/constant/assessment';
+import { AddDiagnosisSchema, AddDiagnosisSchemaType } from '@/schemas/encounter';
+import { DiagnosisCode, Encounter } from '@/types/resources/encounter';
+import { router } from '@inertiajs/vue3';
 import { toTypedSchema } from '@vee-validate/zod';
 import { Plus } from 'lucide-vue-next';
 import { useForm, Field as VeeField } from 'vee-validate';
 import { computed, inject, ref, Ref } from 'vue';
-import { router } from '@inertiajs/vue3';
-import { store } from '@/actions/App/Http/Controllers/Resources/AssessmentController';
 
-const open = ref(false)
+const open = ref(false);
 
-const schema = toTypedSchema(Icd10Schema);
+const schema = toTypedSchema(AddDiagnosisSchema);
 
-const diagnosisTypeItem = Object.entries(DiagnosisRole).map((value) => ({
-    label: value[1],
-    value: value[0],
+const diagnosisRoleItem = Object.entries(DiagnosisRole).map((value) => ({
+    label: DiagnosisRoleLabel[value[1]],
+    value: value[1],
 }));
 
-const icd10sPagination = inject<Ref<Pagination<Icd10>>>('icd10s');
-
-const icd10s = computed(
-    () =>
-        icd10sPagination?.value.data.map((icd10) => ({
-            label: `${icd10.icd10_code} - ${icd10.icd10_id}`,
-            value: String(icd10.id),
-        })) ?? [],
-);
-
-const searchIcd10 = inject<(value: string) => void>('icd10_search');
+const diagnosisStatusItem = Object.entries(DiagnosisStatus).map((value) => ({
+    label: DiagnosisStatusLabel[value[1]],
+    value: value[1],
+}));
 
 const form = useForm({
     validationSchema: schema,
 });
 
-const encounter = inject<Ref<Encounter>>('encounter')
+const encounter = inject<Ref<Encounter>>('encounter');
+const searchDiagnosis = inject<(value: string) => void>('search_diagnosis');
 
-const submit = form.handleSubmit((val: Icd10SchemaType) => {
-    router.post(store({
-        encounter: encounter?.value.uuid as string
-    }).url, {
-        icd10s: [
-            val
-        ]
-    }, {
-        onFinish: () => {
-            open.value = false
-        }
-    })
-})
+const diagnosis_codes = inject<Ref<DiagnosisCode[]>>('diagnosis_codes');
+const diagnosisCodeItem = computed(
+    () =>
+    diagnosis_codes?.value.map((code) => ({
+        label: `${code.code} - ${code.display}`,
+        value: code.code,
+    })) ?? [],
+);
+
+const mapSelectedDiagnosis = (selectedCode: string) => {
+    const selected = diagnosis_codes?.value.find((code) => code.code === selectedCode);
+    if (!selected) return;
+    form.setFieldValue('code', selected.code);
+    form.setFieldValue('display', selected.display);
+    form.setFieldValue('system', selected.system);
+};
+
+const submit = form.handleSubmit((val: AddDiagnosisSchemaType) => {
+    router.post(
+        store({
+            encounter: encounter?.value.uuid as string,
+        }).url,
+        {
+            diagnoses: [val],
+        },
+        {
+            onFinish: () => {
+                open.value = false;
+            },
+        },
+    );
+});
 </script>
 
 <template>
@@ -64,14 +76,14 @@ const submit = form.handleSubmit((val: Icd10SchemaType) => {
         <DialogScrollContent>
             <DialogHeader>
                 <DialogTitle>Tambah Diagnosa</DialogTitle>
-                <DialogDescription>Tambah diagnosa pasien menggunakan kode ICD10.</DialogDescription>
+                <DialogDescription>Tambah diagnosa pasien menggunakan kode diagnosa.</DialogDescription>
             </DialogHeader>
-            <form id="icd10" class="flex flex-col gap-4" @submit="submit">
-                <VeeField name="diagnosis_type" v-slot="{ field, errors }">
+            <form id="diagnosis" class="flex flex-col gap-4" @submit="submit">
+                <VeeField name="diagnosis_role" v-slot="{ field, errors }">
                     <Field>
                         <FieldLabel>Tipe Diagnosa</FieldLabel>
                         <FieldContent>
-                            <Combobox @item:select="(value) => field.onChange(value)" :items="diagnosisTypeItem" placeholder="Tipe diagnosa" />
+                            <Combobox @item:select="(value) => field.onChange(value)" :items="diagnosisRoleItem" placeholder="Tipe diagnosa" />
                         </FieldContent>
                         <FieldError
                             v-if="errors.length"
@@ -83,11 +95,11 @@ const submit = form.handleSubmit((val: Icd10SchemaType) => {
                         />
                     </Field>
                 </VeeField>
-                <VeeField name="icd10" v-slot="{ field, errors }">
+                <VeeField name="diagnosis_status" v-slot="{ field, errors }">
                     <Field>
-                        <FieldLabel>ICD 10</FieldLabel>
+                        <FieldLabel>Status Diagnosa</FieldLabel>
                         <FieldContent>
-                            <RekaCombobox :items="icd10s" @search="searchIcd10" v-model="field.value" @update:model-value="field.onChange" />
+                            <Combobox @item:select="field.onChange" :items="diagnosisStatusItem" placeholder="Status diagnosa" />
                         </FieldContent>
                         <FieldError
                             v-if="errors.length"
@@ -99,9 +111,21 @@ const submit = form.handleSubmit((val: Icd10SchemaType) => {
                         />
                     </Field>
                 </VeeField>
+                <Field>
+                    <FieldLabel>Status Diagnosa</FieldLabel>
+                    <FieldContent>
+                        <RekaCombobox
+                            v-model="form.values.code"
+                            @update:model-value="mapSelectedDiagnosis"
+                            :items="diagnosisCodeItem"
+                            :server-search="true"
+                            @search="searchDiagnosis"
+                        />
+                    </FieldContent>
+                </Field>
             </form>
             <div class="flex justify-end">
-                <Button form="icd10">Simpan</Button>
+                <Button form="diagnosis">Simpan</Button>
             </div>
         </DialogScrollContent>
     </Dialog>

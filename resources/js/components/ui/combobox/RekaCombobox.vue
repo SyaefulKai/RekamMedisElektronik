@@ -46,14 +46,14 @@ const internalValue = computed(() =>
 function onUpdateModelValue(val: ComboboxItemType | null) {
   if (val) {
     emit('update:modelValue', val.value)
-    searchTerm.value = ''
+    // searchTerm.value = ''
     open.value = false
   }
 }
 
 function onOpenChange(val: boolean) {
   open.value = val
-  if (!val) searchTerm.value = ''
+//   if (!val) searchTerm.value = ''
 }
 </script>
 
@@ -66,13 +66,13 @@ function onOpenChange(val: boolean) {
     @update:open="onOpenChange"
   >
     <ComboboxAnchor class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
-      <ComboboxInput
+    <ComboboxInput
         v-model="searchTerm"
         class="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
-        :placeholder="selectedLabel || placeholder"
-        :display-value="() => searchTerm"
-        @input="emit('search', searchTerm)"
-      />
+        :placeholder="placeholder"
+        :display-value="(item: any) => item?.label ?? selectedLabel"
+        @input="emit('search', ($event.target as HTMLInputElement).value)"
+    />
       <ComboboxTrigger class="ml-2 shrink-0 opacity-50 hover:opacity-100">
         <ChevronsUpDown class="h-4 w-4" />
       </ComboboxTrigger>

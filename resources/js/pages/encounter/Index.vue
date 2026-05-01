@@ -3,15 +3,15 @@ import { index } from '@/actions/App/Http/Controllers/Resources/EncounterControl
 import AppLayout from '@/layouts/AppLayout.vue';
 import EncounterTabs from '@/pages/encounter/components/EncounterTabs.vue';
 import PatientDetail from '@/pages/encounter/components/PatientDetail.vue';
-import { BreadcrumbItem, Pagination } from '@/types';
-import { Encounter, Icd10 } from '@/types/resources/encounter';
+import { BreadcrumbItem } from '@/types';
+import { DiagnosisCode, Encounter } from '@/types/resources/encounter';
 import { Head, router } from '@inertiajs/vue3';
 import { useDebounceFn } from '@vueuse/core';
 import { provide, toRef } from 'vue';
 
 const props = defineProps<{
     encounter: Encounter,
-    icd10s: Pagination<Icd10>
+    diagnosis_codes: DiagnosisCode[]
 }>()
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -23,25 +23,25 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ]
 
-const searchIcd10 = useDebounceFn((value: string) => {
+const searchDiagnosis = useDebounceFn((value: string) => {
     router.get(index({
         encounter: props.encounter.uuid
     }).url, {
         filter: {
-            icd10_query: value
+            query: value
         },
     }, {
         preserveState: true,
         preserveScroll: true,
         only: [
-            'icd10s'
+            'diagnosis_codes'
         ]
     })
 }, 500)
 
 provide('encounter', toRef(props, 'encounter'))
-provide('icd10s', toRef(props, 'icd10s'))
-provide('icd10_search', searchIcd10)
+provide('diagnosis_codes', toRef(props, 'diagnosis_codes'))
+provide('search_diagnosis', searchDiagnosis)
 </script>
 
 <template>

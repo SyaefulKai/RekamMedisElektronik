@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Resources\Encounter\CreateSubjectiveRequest;
 use App\Models\Resources\Assessments\Assessment;
 use App\Models\Resources\Encounter;
 use App\Models\Resources\Objective;
+use App\Models\Resources\Plans\Plan;
 use App\Models\Resources\Subjective;
 
 class EncounterService
@@ -48,5 +48,12 @@ class EncounterService
                 'display' => $diagnosis['display'],
             ]);
         }
+    }
+
+    public function storePlan(Encounter $encounter, array $data): Plan
+    {
+        return $encounter->plan()->create([
+            'encounter_id' => $encounter->id
+        ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models\Resources;
 
 use App\Models\Queue;
 use App\Models\Resources\Assessments\Assessment;
+use App\Models\Resources\Plans\Plan;
 use App\Observers\EncounterObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -50,6 +51,11 @@ class Encounter extends Model
     public function assessment()
     {
         return $this->hasOne(Assessment::class);
+    }
+
+    public function plan()
+    {
+        return $this->hasOne(Plan::class);
     }
 
     public function uniqueIds(): array

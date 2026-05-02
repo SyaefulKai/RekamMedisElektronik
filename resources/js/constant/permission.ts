@@ -46,6 +46,13 @@ export const practitionerPermissions = {
     'delete.practitioner': 'Hapus Praktisi'
 }
 
+export const procedurePermissions = {
+    'view.procedure': 'Lihat Tindakan',
+    'create.procedure': 'Daftarkan Tindakan',
+    'update.procedure': 'Edit Tindakan',
+    'delete.procedure': 'Hapus Tindakan'
+}
+
 export const permissions = {
     ...medicalRecordPermissions,
     ...registrationPermissions,
@@ -53,7 +60,8 @@ export const permissions = {
     ...rolePermissions,
     ...dashboardPermisions,
     ...patientPermissions,
-    ...practitionerPermissions
+    ...practitionerPermissions,
+    ...procedurePermissions
 } as const
 
 export const PermissionKey = Object.keys(permissions) as PermissionKeyType[]

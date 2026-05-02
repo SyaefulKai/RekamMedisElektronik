@@ -6,6 +6,7 @@ import { Encounter } from '@/types/resources/encounter';
 import { inject, Ref } from 'vue';
 
 const encounter = inject<Ref<Encounter>>('encounter');
+const columns = Icd10Column(encounter!.value)
 </script>
 
 <template>
@@ -14,6 +15,6 @@ const encounter = inject<Ref<Encounter>>('encounter');
             <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Diagnosa</h4>
             <DiagnosisDialog />
         </div>
-        <DataTable :columns="Icd10Column" :pagination="encounter?.assessment?.assessment_diagnoses ?? []" />
+        <DataTable :columns="columns" :pagination="encounter?.assessment?.assessment_diagnoses ?? []" />
     </div>
 </template>

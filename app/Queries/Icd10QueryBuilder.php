@@ -2,7 +2,7 @@
 
 namespace App\Queries;
 
-use App\Enums\DiagnosisSystem;
+use App\Enums\CodeSystem;
 use App\Models\Icd10;
 use App\Services\Diagnosis\Contracts\DiagnosisSearch;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -26,7 +26,7 @@ class Icd10QueryBuilder implements DiagnosisSearch
             ->get()
             ->map(fn($value) => [
                 'code'    => $value->icd10_code,
-                'system'  => DiagnosisSystem::ICD10,
+                'system'  => CodeSystem::ICD10,
                 'display' => $value->icd10_id,
             ]);
     }

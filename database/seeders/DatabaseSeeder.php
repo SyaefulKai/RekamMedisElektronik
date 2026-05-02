@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             Icd10Seeder::class,
+            Icd9Seeder::class
         ]);
 
         $user = User::factory()->create([

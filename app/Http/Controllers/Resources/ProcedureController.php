@@ -14,12 +14,20 @@ class ProcedureController extends Controller
     public function index(
         Icd9QueryBuilder $icd9,
         ProcedureQueryBuilder $procedure
-    )
-    {
+    ) {
         $this->authorize('viewAny', Procedure::class);
         return Inertia::render('procedure/Index', [
             'codes' => $icd9->search(10),
             'procedures' => $procedure->paginate(10)
+        ]);
+    }
+
+    public function create(
+        Icd9QueryBuilder $icd9
+    ) {
+        $this->authorize('create', Procedure::class);
+        return Inertia::render('procedure/Create', [
+            'codes' => $icd9->search(10),
         ]);
     }
 
@@ -29,6 +37,6 @@ class ProcedureController extends Controller
         $data = $request->validated();
         Procedure::create($data);
         Inertia::flash('procedureCreated', 'Tindakan berhasil dibuat.');
-        return redirect()->back();
+        return to_route('procedure.index');
     }
 }

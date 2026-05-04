@@ -10,7 +10,7 @@ class ProcedureQueryBuilder
 {
     public function paginate(int $perPage)
     {
-        $query = Procedure::query()->with('user');
+        $query = Procedure::query();
         return QueryBuilder::for($query)
             ->allowedFilters(
                 AllowedFilter::partial('name')

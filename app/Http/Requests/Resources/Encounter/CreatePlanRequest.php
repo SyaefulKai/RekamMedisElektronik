@@ -23,7 +23,22 @@ class CreatePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'procedures' => [
+                'nullable',
+                'array'
+            ],
+            'procedures.*.code' => [
+                'required',
+            ],
+            'procedures.*.display' => [
+                'required',
+            ],
+            'procedures.*.system' => [
+                'required'
+            ],
+            'procedures.*.name' => [
+                'required',
+            ]
         ];
     }
 }

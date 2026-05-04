@@ -22,7 +22,8 @@ class PermissionSeeder extends Seeder
             'role' => ['view', 'create', 'update', 'delete'],
             'patient' => ['view', 'create', 'update', 'delete'],
             'practitioner' => ['view', 'create', 'update', 'delete'],
-            'encounter' => ['view', 'create', 'update', 'delete']
+            'encounter' => ['view', 'create', 'update', 'delete'],
+            'procedure' => ['view', 'create', 'update', 'delete'],
         ]);
 
         $data = [];

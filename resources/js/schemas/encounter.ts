@@ -103,3 +103,12 @@ export const AddDiagnosisSchema = z.object({
 })
 
 export type AddDiagnosisSchemaType = z.infer<typeof AddDiagnosisSchema>
+
+export const AddProcedureSchema = z.object({
+    code: z.string(),
+    system: z.string(),
+    display: z.string(),
+    name: z.string()
+})
+
+export type AddProcedureSchemaType = z.infer<typeof AddProcedureSchema>

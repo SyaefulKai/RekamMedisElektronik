@@ -5,5 +5,6 @@ export type Icd9 = {
 }
 
 export type Procedure = Icd9 & {
+    id: number,
     name: string
 }

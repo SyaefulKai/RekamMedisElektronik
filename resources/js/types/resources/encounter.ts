@@ -1,6 +1,7 @@
 import { DiagnosisRole, DiagnosisStatus, DiagnosisSystem } from "@/constant/assessment"
 import { ObjectiveSchemaType } from "@/schemas/encounter"
 import { Patient } from "@/types/resources/patient"
+import { Procedure } from "@/types/resources/procedure"
 
 export const EncounterStatus = {
     Arrived: 'arrived',
@@ -47,7 +48,8 @@ export type Encounter = {
     subjective?: Subjective,
     objective?: ObjectiveSchemaType,
     assessment?: Assessment,
-    patient?: Patient
+    patient?: Patient,
+    plan?: Plan
 }
 
 export type Subjective = {
@@ -78,6 +80,11 @@ export type Icd10 = {
 export type Assessment = {
     id: number,
     assessment_diagnoses: AssessmentDiagnosis[]
+}
+
+export type Plan = {
+    id: number,
+    procedures: Procedure[]
 }
 
 export type AssessmentDiagnosis = {

@@ -2,6 +2,7 @@
 
 namespace App\Models\Resources;
 
+use App\Models\Resources\Plans\Plan;
 use Illuminate\Database\Eloquent\Model;
 
 class Procedure extends Model
@@ -12,4 +13,9 @@ class Procedure extends Model
         'display',
         'name',
     ];
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
 }

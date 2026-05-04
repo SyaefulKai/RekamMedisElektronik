@@ -52,8 +52,25 @@ class EncounterService
 
     public function storePlan(Encounter $encounter, array $data): Plan
     {
-        return $encounter->plan()->create([
-            'encounter_id' => $encounter->id
-        ]);
+        $plan = Plan::updateOrCreate(
+            ['encounter_id' => $encounter->id],
+            $data
+        );
+
+        $this->storeProcedure($plan, $data['procedures']);
+
+        return $plan;
+    }
+
+    public function storeProcedure(Plan $plan, array $data)
+    {
+        foreach ($data as $procedure) {
+            $plan->procedures()->create([
+                'code' => $procedure['code'],
+                'system' => $procedure['system'],
+                'display' => $procedure['display'],
+                'name' => $procedure['name'],
+            ]);
+        }
     }
 }

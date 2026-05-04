@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Item, ItemContent, ItemGroup, ItemTitle } from '@/components/ui/item';
 import ItemActions from '@/components/ui/item/ItemActions.vue';
 import { Label } from '@/components/ui/label';
-import { dashboardPermisions, medicalRecordPermissions, patientPermissions, practitionerPermissions, registrationPermissions, rolePermissions, userPermissions } from '@/constant/permission';
+import { dashboardPermisions, medicalRecordPermissions, patientPermissions, practitionerPermissions, procedurePermissions, registrationPermissions, rolePermissions, userPermissions } from '@/constant/permission';
 import { Permission } from '@/types';
 import { computed, ref } from 'vue';
 
@@ -22,6 +22,7 @@ const permissionList = {
     'Manajemen User': userPermissions,
     'Manajemen Praktisi': practitionerPermissions,
     'Manajemen Pasien': patientPermissions,
+    'Manajemen Prosedur': procedurePermissions,
     'Rekam Medis': medicalRecordPermissions,
     Antrian: registrationPermissions,
 };

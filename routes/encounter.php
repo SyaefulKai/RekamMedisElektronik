@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Resources\AssessmentController;
+use App\Http\Controllers\Resources\PlanController;
 use App\Http\Controllers\Resources\AssessmentDiagnosisController;
 use App\Http\Controllers\Resources\EncounterController;
 use App\Http\Controllers\Resources\ObjectiveController;
@@ -22,5 +23,9 @@ Route::middleware('auth')->prefix('encounters')->group(function() {
     Route::prefix('/{encounter:uuid}/assessments')->group(function() {
         Route::post('/', [AssessmentController::class, 'store'])->name('assessment.store');
         Route::delete('/diagnoses/{diagnosis}', [AssessmentDiagnosisController::class, 'delete'])->name('assessment.diagnosis.delete');
+    });
+
+    Route::prefix('/{encounter:uuid}/plans')->group(function() {
+        Route::post('/', [PlanController::class, 'store'])->name('plan.store');
     });
 });

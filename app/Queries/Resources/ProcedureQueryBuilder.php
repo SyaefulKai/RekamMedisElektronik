@@ -18,4 +18,15 @@ class ProcedureQueryBuilder
             ->paginate($perPage)
             ->withQueryString();
     }
+
+    public function get(int $limit = 100)
+    {
+        $query = Procedure::query();
+        return QueryBuilder::for($query)
+            ->allowedFilters(
+                AllowedFilter::partial('name')
+            )
+            ->limit($limit)
+            ->get();
+    }
 }

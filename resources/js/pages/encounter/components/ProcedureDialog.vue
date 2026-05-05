@@ -70,6 +70,7 @@ const submit = form.handleSubmit((val: AddProcedureSchemaType) => {
           <FieldContent>
             <Combobox
             :items="procedureCodeItem"
+            placeholder="Pilih tindakan"
             @item:select="handleProcedureSelection"/>
           </FieldContent>
         </Field>

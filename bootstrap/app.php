@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
              __DIR__.'/../routes/queue.php',
              __DIR__.'/../routes/encounter.php',
              __DIR__.'/../routes/procedure.php',
+             __DIR__.'/../routes/medication.php',
         ],
         commands: __DIR__.'/../routes/console.php',
         health: '/up',

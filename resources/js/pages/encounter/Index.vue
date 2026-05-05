@@ -7,7 +7,7 @@ import PatientDetail from '@/pages/encounter/components/PatientDetail.vue';
 import { BreadcrumbItem } from '@/types';
 import { DiagnosisCode, Encounter } from '@/types/resources/encounter';
 import { Procedure } from '@/types/resources/procedure';
-import { Head, router } from '@inertiajs/vue3';
+import { Head, router, usePoll } from '@inertiajs/vue3';
 import { useDebounceFn } from '@vueuse/core';
 import { provide, toRef } from 'vue';
 
@@ -59,6 +59,8 @@ provide('diagnosis_codes', toRef(props, 'diagnosis_codes'))
 provide('procedures', toRef(props, 'procedures'))
 provide('search_diagnosis', searchDiagnosis)
 provide('search_procedure_code', searchProcedure)
+
+usePoll(5000)
 </script>
 
 <template>

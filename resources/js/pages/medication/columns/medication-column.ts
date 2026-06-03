@@ -17,10 +17,10 @@ export const MedicationColumn: ColumnDef<Medication>[] = [
     },
     {
         header: 'Bentuk',
-        cell: ({row}) => MedicationFormLabel[row.original.form as MedicationForm]
+        cell: ({ row }) => MedicationFormLabel[row.original.form as MedicationForm]
     },
     {
-        header: 'Satuan',
-        cell: ({row}) => MedicationUnitLabel[row.original.unit as MedicationUnit]
-    }
+        accessorKey: 'stocks_sum_quantity',
+        header: 'Stok'
+    },
 ]

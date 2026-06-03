@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('medication_stocks', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('medication_id')->constrained()->cascadeOnDelete();
+            $table->id();
+            $table->foreignId('medication_id')->constrained()->cascadeOnDelete();
             $table->string('batch_number')->nullable();
             $table->unsignedInteger('quantity');
             $table->date('expired_at')->nullable();

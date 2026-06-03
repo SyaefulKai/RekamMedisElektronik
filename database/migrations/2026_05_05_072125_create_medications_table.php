@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('form');
             $table->string('strength');
             $table->string('unit');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

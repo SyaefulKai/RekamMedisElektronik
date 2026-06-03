@@ -2,10 +2,13 @@
 
 namespace App\Models\Resources\Medications;
 
+use Database\Factories\MedicationFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Medication extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'generic_name',
         'trade_name',
@@ -19,5 +22,10 @@ class Medication extends Model
     public function stocks()
     {
         return $this->hasMany(MedicationStock::class);
+    }
+
+    public static function newFactory()
+    {
+        return MedicationFactory::new();
     }
 }

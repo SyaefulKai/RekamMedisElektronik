@@ -15,6 +15,10 @@ class MedicationStock extends Model
         'sell_price'
     ];
 
+    protected $casts = [
+        'expired_at' => 'date',
+    ];
+
     public function medication()
     {
         return $this->belongsTo(Medication::class);

@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Resources;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resources\Medication\CreateMedicationMasterRequest;
 use App\Models\Resources\Medications\Medication;
+use App\Queries\Resources\MedicationQueryBuilder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MedicationController extends Controller
 {
-    public function index()
+    public function index(
+        MedicationQueryBuilder $query
+    )
     {
         return Inertia::render('medication/Index', [
-            'medications' => Medication::paginate(10)
+            'medications' => $query->search(withSum: true)
         ]);
     }
 

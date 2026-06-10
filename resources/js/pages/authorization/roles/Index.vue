@@ -5,6 +5,9 @@ import { Head, usePage } from '@inertiajs/vue3';
 import RoleCardList from './components/RoleCardList.vue';
 import { index } from '@/actions/App/Http/Controllers/Authorization/RoleController';
 import CreateRoleButton from './components/CreateRoleButton.vue';
+import { router } from '@inertiajs/vue3';
+import { toast } from 'vue-sonner';
+import { onUnmounted } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,6 +21,14 @@ const page = usePage<SharedData>()
 defineProps<{
     roles: Role[];
 }>();
+
+const flashEvent = router.on('flash', (flashProps) => {
+    const flashMessage = flashProps.detail.flash
+    if(flashMessage.roleCreated) toast.success(flashMessage.roleCreated as string)
+    if(flashMessage.roleDeleted) toast.success(flashMessage.roleDeleted as string)
+})
+
+onUnmounted(() => flashEvent())
 </script>
 
 <template>

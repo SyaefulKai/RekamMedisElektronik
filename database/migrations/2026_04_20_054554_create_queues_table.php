@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QueueStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,12 +18,7 @@ return new class extends Migration
             $table->integer('queue_number');
             $table->foreignId('practitioner_id');
             $table->foreignId('patient_id');
-            $table->enum('status', [
-                'planned',
-                'in-progress',
-                'finished',
-                'cancelled'
-            ])->default('planned');
+            $table->enum('status', array_column(QueueStatus::cases(), 'value'))->default('planned');
             $table->timestamps();
 
             $table->unique([

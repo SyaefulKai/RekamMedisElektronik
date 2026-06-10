@@ -26,4 +26,9 @@ class Practitioner extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function encounters()
+    {
+        return $this->hasMany(Encounter::class);
+    }
 }

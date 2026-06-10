@@ -121,7 +121,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::deleteMethod
- * @see app/Http/Controllers/Authorization/RoleController.php:56
+ * @see app/Http/Controllers/Authorization/RoleController.php:58
  * @route '/roles/{role}'
  */
 export const deleteMethod = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -136,7 +136,7 @@ deleteMethod.definition = {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::deleteMethod
- * @see app/Http/Controllers/Authorization/RoleController.php:56
+ * @see app/Http/Controllers/Authorization/RoleController.php:58
  * @route '/roles/{role}'
  */
 deleteMethod.url = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -169,7 +169,7 @@ deleteMethod.url = (args: { role: number | { id: number } } | [role: number | { 
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::deleteMethod
- * @see app/Http/Controllers/Authorization/RoleController.php:56
+ * @see app/Http/Controllers/Authorization/RoleController.php:58
  * @route '/roles/{role}'
  */
 deleteMethod.delete = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -246,7 +246,7 @@ edit.head = (args: { role: number | { id: number } } | [role: number | { id: num
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::update
- * @see app/Http/Controllers/Authorization/RoleController.php:47
+ * @see app/Http/Controllers/Authorization/RoleController.php:48
  * @route '/roles/{role}'
  */
 export const update = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -261,7 +261,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::update
- * @see app/Http/Controllers/Authorization/RoleController.php:47
+ * @see app/Http/Controllers/Authorization/RoleController.php:48
  * @route '/roles/{role}'
  */
 update.url = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -289,7 +289,7 @@ update.url = (args: { role: string | number } | [role: string | number ] | strin
 
 /**
 * @see \App\Http\Controllers\Authorization\RoleController::update
- * @see app/Http/Controllers/Authorization/RoleController.php:47
+ * @see app/Http/Controllers/Authorization/RoleController.php:48
  * @route '/roles/{role}'
  */
 update.patch = (args: { role: string | number } | [role: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({

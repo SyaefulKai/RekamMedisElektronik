@@ -9,7 +9,8 @@ import { BreadcrumbItem, Pagination } from '@/types';
 import { Patient } from '@/types/resources/patient';
 import { Head, router } from '@inertiajs/vue3';
 import { useDebounceFn } from '@vueuse/core';
-import { computed } from 'vue';
+import { computed, onUnmounted } from 'vue';
+import { toast } from 'vue-sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -40,6 +41,14 @@ const handleSearch = useDebounceFn((value: string) => {
         },
     );
 }, 500);
+
+const flashEvent = router.on('flash', (flashProps) => {
+    const flashMessage = flashProps.detail.flash
+    if(flashMessage.patientCreated) toast.success(flashMessage.patientCreated as string)
+    if(flashMessage.patientUpdated) toast.success(flashMessage.patientUpdated as string)
+})
+
+onUnmounted(() => flashEvent())
 </script>
 
 <template>

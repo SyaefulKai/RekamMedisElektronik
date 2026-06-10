@@ -32,6 +32,7 @@ class PractitionerController extends Controller
         $this->authorize('create', Practitioner::class);
         $data = $request->validated();
         $user->practitioner()->create($data);
-        return redirect()->to(route('user.index'));
+        Inertia::flash('practitionerCreated', "Data praktisi $user->name berhasil disimpan.");
+        return to_route('user.index');
     }
 }

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { BreadcrumbItem, Role } from '@/types';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, usePage, router } from '@inertiajs/vue3';
 import PermissionList from './components/PermissionList.vue';
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import SavePermissionButton from './components/SavePermissionButton.vue';
 import { index } from '@/actions/App/Http/Controllers/Authorization/RoleController';
+import { toast } from 'vue-sonner';
 
 const page = usePage();
 
@@ -25,6 +26,13 @@ const permissions = ref<string[]>([]);
 defineProps<{
     role: Role;
 }>();
+
+const flashEvent = router.on('flash', (flashProps) => {
+    const flashMessage = flashProps.detail.flash
+    if(flashMessage) toast.success(flashMessage.roleUpdated as string)
+})
+
+onUnmounted(() => flashEvent())
 </script>
 
 <template>

@@ -5,6 +5,9 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { QueueColumn } from '@/pages/queue/columns/queue';
 import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+import { onUnmounted } from 'vue';
+import { toast } from 'vue-sonner';
 
 defineProps<{
     queues: any
@@ -17,6 +20,11 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ]
 
+const flashEvent = router.on('flash', (flashProps) => {
+    if(flashProps.detail.flash) toast.success(flashProps.detail.flash.queueCreated as string)
+})
+
+onUnmounted(() => flashEvent())
 </script>
 
 <template>

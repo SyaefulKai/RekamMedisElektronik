@@ -42,7 +42,8 @@ class UserController extends Controller
 
         $role = Role::where('id', $data['role'])->firstOrFail();
         $user->assignRole($role);
-        return redirect()->to(route('user.index'));
+        Inertia::flash('userCreated', "Data $user->name berhasil dibuat.");
+        return to_route('user.index');
     }
 
     public function edit(User $user)
@@ -62,6 +63,7 @@ class UserController extends Controller
         $user->update($data);
         $role = Role::where('id', $data['role'])->firstOrFail();
         $user->syncRoles($role);
+        Inertia::flash('userUpdated', "Data $user->name berhasil diperbarui.");
         return redirect()->to(route('user.index'));
     }
 
@@ -69,6 +71,7 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
         $user->delete();
+        Inertia::flash('userDeleted', 'Data pengguna berhasil dihapus.');
         return redirect()->back();
     }
 }

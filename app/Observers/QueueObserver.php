@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Queue;
+use App\Models\Resources\Encounter;
 use Illuminate\Support\Facades\DB;
 
 class QueueObserver
@@ -18,4 +19,5 @@ class QueueObserver
             $queue->queue_number = $count + 1;
         });
     }
+
 }

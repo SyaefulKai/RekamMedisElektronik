@@ -8,7 +8,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class MedicationQueryBuilder
 {
-    public function search(bool $withSum = false, int $perPage = 10)
+    public function paginate(int $perPage = 10, bool $withSum = false)
     {
         $medication = Medication::query();
         return QueryBuilder::for($medication)

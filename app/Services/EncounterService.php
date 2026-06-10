@@ -57,7 +57,13 @@ class EncounterService
             $data
         );
 
-        $this->storeProcedure($plan, $data['procedures']);
+        if (isset($data['procedures'])) {
+            $this->storeProcedure($plan, $data['procedures']);
+        }
+
+        if (isset($data['medications'])) {
+            $this->storeMedication($plan, $data['medications']);
+        }
 
         return $plan;
     }
@@ -70,6 +76,20 @@ class EncounterService
                 'system' => $procedure['system'],
                 'display' => $procedure['display'],
                 'name' => $procedure['name'],
+            ]);
+        }
+    }
+
+    public function storeMedication(Plan $plan, array $data)
+    {
+        foreach ($data as $medication) {
+            $plan->medications()->create([
+                'medication_id' => $medication['medication_id'],
+                'dose' => $medication['dose'] ?? null,
+                'frequency_per_day' => $medication['frequency_per_day'] ?? null,
+                'duration_days' => $medication['duration_days'] ?? null,
+                'quantity' => $medication['quantity'],
+                'instruction' => $medication['instruction'] ?? null,
             ]);
         }
     }

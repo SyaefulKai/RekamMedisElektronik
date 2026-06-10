@@ -16,7 +16,7 @@ class MedicationController extends Controller
     )
     {
         return Inertia::render('medication/Index', [
-            'medications' => $query->search(withSum: true)
+            'medications' => $query->paginate(10, true)
         ]);
     }
 

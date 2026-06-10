@@ -7,6 +7,7 @@ import PatientDetail from '@/pages/encounter/components/PatientDetail.vue';
 import { BreadcrumbItem } from '@/types';
 import { DiagnosisCode, Encounter } from '@/types/resources/encounter';
 import { Procedure } from '@/types/resources/procedure';
+import { Medication } from '@/types/resources/medication';
 import { Head, router, usePoll } from '@inertiajs/vue3';
 import { useDebounceFn } from '@vueuse/core';
 import { provide, toRef } from 'vue';
@@ -15,6 +16,7 @@ const props = defineProps<{
     encounter: Encounter,
     diagnosis_codes: DiagnosisCode[],
     procedures: Procedure[],
+    medications: Medication[],
 }>()
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -54,11 +56,29 @@ const searchProcedure = (query: Record<string, any>) => {
     )
 }
 
+const searchMedication = (name: string) => {
+    router.get(index({
+        encounter: props.encounter.uuid
+    }).url, {
+        filter: {
+            name: name
+        },
+    }, {
+        preserveState: true,
+        preserveScroll: true,
+        only: [
+            'medications'
+        ]
+    })
+}
+
 provide('encounter', toRef(props, 'encounter'))
 provide('diagnosis_codes', toRef(props, 'diagnosis_codes'))
 provide('procedures', toRef(props, 'procedures'))
+provide('medications', toRef(props, 'medications'))
 provide('search_diagnosis', searchDiagnosis)
 provide('search_procedure_code', searchProcedure)
+provide('search_medication', searchMedication)
 
 usePoll(5000)
 </script>

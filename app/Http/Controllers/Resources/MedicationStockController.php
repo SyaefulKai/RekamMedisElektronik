@@ -18,7 +18,7 @@ class MedicationStockController extends Controller
     )
     {
         return Inertia::render('medication/StockCreate', [
-            'medications' => $query->search(),
+            'medications' => $query->paginate(10),
         ]);
     }
 

@@ -38,7 +38,33 @@ class CreatePlanRequest extends FormRequest
             ],
             'procedures.*.name' => [
                 'required',
-            ]
+            ],
+            'medications' => [
+                'nullable',
+                'array'
+            ],
+            'medications.*.medication_id' => [
+                'required',
+                'integer',
+                'exists:medications,id'
+            ],
+            'medications.*.dose_per_take' => [
+                'nullable',
+                'numeric'
+            ],
+            'medications.*.frequency_per_day' => [
+                'nullable',
+                'integer'
+            ],
+            'medications.*.instruction' => [
+                'nullable',
+                'string'
+            ],
+            'medications.*.quantity' => [
+                'required',
+                'integer',
+                'min:1'
+            ],
         ];
     }
 }

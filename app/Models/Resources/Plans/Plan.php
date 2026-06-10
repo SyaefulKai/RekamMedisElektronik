@@ -22,4 +22,9 @@ class Plan extends Model
     {
         return $this->hasMany(PlanProcedure::class, 'plan_id');
     }
+
+    public function medications()
+    {
+        return $this->hasMany(PlanMedication::class);
+    }
 }

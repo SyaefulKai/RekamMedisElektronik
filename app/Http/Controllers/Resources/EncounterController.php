@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Resources\Encounter\CreateEncounterRequest;
 use App\Models\Resources\Encounter;
 use App\Queries\Icd9QueryBuilder;
+use App\Queries\Resources\MedicationQueryBuilder;
 use App\Queries\Resources\ProcedureQueryBuilder;
 use App\Services\Diagnosis\DiagnosisSearchService;
 use Inertia\Inertia;
@@ -15,7 +16,8 @@ class EncounterController extends Controller
     public function index(
         Encounter $encounter,
         DiagnosisSearchService $diagnosis_search,
-        ProcedureQueryBuilder $procedure
+        ProcedureQueryBuilder $procedure,
+        MedicationQueryBuilder $medication
     ) {
         return Inertia::render('encounter/Index', [
             'encounter' => $encounter->load([
@@ -23,10 +25,12 @@ class EncounterController extends Controller
                 'subjective',
                 'objective',
                 'assessment.assessmentDiagnoses',
-                'plan.procedures'
+                'plan.procedures',
+                'plan.medications.medication',
             ]),
             'diagnosis_codes' => $diagnosis_search->search(10),
             'procedures' => $procedure->get(),
+            'medications' => $medication->paginate(10),
         ]);
     }
 

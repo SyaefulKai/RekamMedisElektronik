@@ -27,5 +27,6 @@ Route::middleware('auth')->prefix('encounters')->group(function() {
 
     Route::prefix('/{encounter:uuid}/plans')->group(function() {
         Route::post('/', [PlanController::class, 'store'])->name('plan.store');
+        Route::delete('/{type}/{item}', [PlanController::class, 'destroy'])->name('plan.destroy');
     });
 });

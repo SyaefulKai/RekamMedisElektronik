@@ -64,9 +64,9 @@ const search = (val: Event) => {
               :key="item.value"
               :value="item.value"
               @select="() => {
-                value = value === item.value ? '' : item.value
+                value = item.value
                 open = false
-                emit('item:select', value)
+                emit('item:select', item.value)
               }"
             >
               <CheckIcon

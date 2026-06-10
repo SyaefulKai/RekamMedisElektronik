@@ -40,6 +40,18 @@ export type AllergyCategory = (typeof AllergyCategory)[keyof typeof AllergyCateg
 export type AllergyCriticality = (typeof AllergyCriticality)[keyof typeof AllergyCriticality]
 export type AllergySeverity = (typeof AllergySeverity)[keyof typeof AllergySeverity]
 
+export interface PlanMedication {
+    id: number;
+    plan_id: number;
+    medication_id: number;
+    dose?: number | null;
+    frequency_per_day?: number | null;
+    duration_days?: number | null;
+    quantity: number;
+    instruction?: string | null;
+    name?: string | null;
+}
+
 export type Encounter = {
     id: number,
     uuid: string,
@@ -84,7 +96,8 @@ export type Assessment = {
 
 export type Plan = {
     id: number,
-    procedures: Procedure[]
+    procedures: Procedure[],
+    medications: PlanMedication[]
 }
 
 export type AssessmentDiagnosis = {

@@ -112,3 +112,14 @@ export const AddProcedureSchema = z.object({
 })
 
 export type AddProcedureSchemaType = z.infer<typeof AddProcedureSchema>
+
+export const AddMedicationSchema = z.object({
+    medication_id: z.coerce.number().int().positive(),
+    dose: z.number().positive().optional(),
+    frequency_per_day: z.number().int().positive().optional(),
+    dose_per_take: z.number().int().positive().optional(),
+    instruction: z.string().optional(),
+    quantity: z.number().int().positive(),
+});
+
+export type AddMedicationSchemaType = z.infer<typeof AddMedicationSchema>

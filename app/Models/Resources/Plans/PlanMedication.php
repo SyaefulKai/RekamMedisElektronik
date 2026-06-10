@@ -5,6 +5,7 @@ namespace App\Models\Resources\Plans;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Resources\Plans\Plan;
 use App\Models\Resources\Medications\Medication;
+use App\Models\Resources\Medications\MedicationStock;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class PlanMedication extends Model
@@ -14,6 +15,7 @@ class PlanMedication extends Model
     protected $fillable = [
         'plan_id',
         'medication_id',
+        'medication_stock_id',
         'frequency_per_day',
         'dose_per_take',
         'quantity',
@@ -30,6 +32,11 @@ class PlanMedication extends Model
     public function medication()
     {
         return $this->belongsTo(Medication::class, 'medication_id');
+    }
+
+    public function medicationStock()
+    {
+        return $this->belongsTo(MedicationStock::class, 'medication_stock_id');
     }
 
     protected function name(): Attribute

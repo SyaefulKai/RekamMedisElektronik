@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedicationMovement extends Model
 {
+    protected $table = 'medication_stock_movements';
+
     protected $fillable = [
         'medication_stock_id',
         'type',

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SummaryForm from '@/pages/encounter/components/SummaryForm.vue';
 import AssessmentForm from '@/pages/encounter/components/AssessmentForm.vue';
 import ObjectiveForm from '@/pages/encounter/components/ObjectiveForm.vue';
 import PlanForm from '@/pages/encounter/components/PlanForm.vue';
@@ -11,7 +12,7 @@ const state = ref('subjective');
 </script>
 <template>
     <Tabs v-model="state">
-        <TabsList class="flex flex-col gap-4 md:grid md:grid-cols-4">
+        <TabsList class="flex flex-col gap-4 md:grid md:grid-cols-5">
             <TabsTrigger value="subjective" as-child class="w-full p-0">
                 <Button :variant="state == 'subjective' ? 'ghost' : 'secondary'" class="w-full border">Subjective</Button>
             </TabsTrigger>
@@ -23,6 +24,9 @@ const state = ref('subjective');
             </TabsTrigger>
             <TabsTrigger value="plan" as-child class="w-full p-0">
                 <Button :variant="state == 'plan' ? 'ghost' : 'secondary'" class="w-full border">Plan</Button>
+            </TabsTrigger>
+            <TabsTrigger value="summary" as-child class="w-full p-0">
+                <Button :variant="state == 'summary' ? 'ghost' : 'secondary'" class="w-full border">Ringkasan</Button>
             </TabsTrigger>
         </TabsList>
         <TabsContent value="subjective">
@@ -36,6 +40,9 @@ const state = ref('subjective');
         </TabsContent>
         <TabsContent value="plan">
             <PlanForm />
+        </TabsContent>
+        <TabsContent value="summary">
+            <SummaryForm></SummaryForm>
         </TabsContent>
     </Tabs>
 </template>

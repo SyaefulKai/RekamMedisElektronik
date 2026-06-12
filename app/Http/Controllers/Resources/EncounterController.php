@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Resources;
 
+use App\Enums\EncounterStatus;
+use App\Enums\QueueStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resources\Encounter\CreateEncounterRequest;
 use App\Models\Resources\Encounter;
@@ -45,5 +47,18 @@ class EncounterController extends Controller
         return redirect()->to(route('encounter.index', [
             'encounter' => $encounter->uuid
         ]));
+    }
+
+    public function finish(Encounter $encounter)
+    {
+        $encounter->update([
+            'status' => EncounterStatus::Finished,
+        ]);
+
+        $encounter->queue()->update([
+            'status' => QueueStatus::Finished,
+        ]);
+
+        return redirect()->to(route('dashboard'));
     }
 }

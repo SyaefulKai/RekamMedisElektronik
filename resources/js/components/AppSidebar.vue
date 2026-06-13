@@ -14,12 +14,13 @@ import { index as UserIndex } from '@/routes/user';
 import { create as MedicationStockCreate } from '@/actions/App/Http/Controllers/Resources/MedicationStockController.js';
 import { NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, Hammer, LayoutGrid, ListOrdered, Pill, ShieldCheck, Stethoscope, UserCog, Users } from 'lucide-vue-next';
+import { BookOpen, FileText, Folder, Hammer, LayoutGrid, ListOrdered, Pill, ShieldCheck, Stethoscope, UserCog, Users } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     { title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
     { title: 'Antrian', href: QueueIndex().url, icon: ListOrdered },
+    { title: 'Laporan', href: '/report', icon: FileText },
 ];
 
 const patientManagement: NavItem[] = [{ title: 'Data Pasien', href: PatientIndex().url, permission: 'view.patient' }];

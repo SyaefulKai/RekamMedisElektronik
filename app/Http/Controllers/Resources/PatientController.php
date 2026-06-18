@@ -34,6 +34,25 @@ class PatientController extends Controller
         return to_route('patient.index');
     }
 
+    public function history(Patient $patient)
+    {
+        return Inertia::render('patient/History', [
+            'patient' => $patient,
+            'encounters' => $patient->encounters()
+                ->where('status', 'finished')
+                ->with([
+                    'practitioner.user',
+                    'subjective',
+                    'assessment.assessmentDiagnoses',
+                    'plan.procedures',
+                    'plan.medications.medication',
+                ])
+                ->latest('date')
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
+    }
+
     public function edit(Patient $patient)
     {
         return Inertia::render('patient/Edit', [

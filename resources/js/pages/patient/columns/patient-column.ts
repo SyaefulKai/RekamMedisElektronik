@@ -1,10 +1,10 @@
 import { create } from "@/actions/App/Http/Controllers/QueueController";
-import { deleteMethod } from "@/actions/App/Http/Controllers/Resources/PatientController";
+import { deleteMethod, history } from "@/actions/App/Http/Controllers/Resources/PatientController";
 import LinkButton from "@/components/LinkButton.vue";
 import { edit } from "@/routes/patient";
 import { Patient } from "@/types/resources/patient";
 import { ColumnDef } from "@tanstack/vue-table";
-import { User } from "lucide-vue-next";
+import { History, User } from "lucide-vue-next";
 import { h } from "vue";
 
 export const PatientColumn = (): ColumnDef<Patient>[] => [
@@ -41,6 +41,15 @@ export const PatientColumn = (): ColumnDef<Patient>[] => [
                     method: "get",
                     label: 'Edit',
                     variant: 'secondary'
+                }),
+                h(LinkButton, {
+                    href: history({
+                        patient: row.original.id
+                    }).url,
+                    method: 'get',
+                    label: 'Riwayat',
+                    variant: 'outline',
+                    icon: History,
                 }),
                 h(LinkButton, {
                     href: create({

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->prefix('patients')->group(function() {
     Route::get('/', [PatientController::class, 'index'])->name('patient.index');
     Route::get('/create', [PatientController::class, 'create'])->name('patient.create');
+    Route::get('/{patient}/history', [PatientController::class, 'history'])->name('patient.history');
     Route::get('/{patient}', [PatientController::class, 'edit'])->name('patient.edit');
     Route::patch('/{patient}', [PatientController::class, 'update'])->name('patient.update');
     Route::post('/', [PatientController::class, 'store'])->name('patient.store');

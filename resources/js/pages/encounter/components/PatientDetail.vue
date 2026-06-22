@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import LinkButton from '@/components/LinkButton.vue';
+import { history } from '@/actions/App/Http/Controllers/Resources/PatientController';
 import { Patient } from '@/types/resources/patient';
-import { ChevronDown } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { Encounter } from '@/types/resources/encounter';
+import { ChevronDown, History } from 'lucide-vue-next';
+import { inject, ref } from 'vue';
 
 const props = defineProps<{
     patient: Patient;
 }>();
+
+const encounter = inject<Encounter>('encounter');
 
 const isOpen = ref(false);
 
@@ -54,11 +59,12 @@ const { years, months, days } = calculateAge(props.patient.birth_date);
             </div>
         </div>
     </div>
-    <Collapsible v-model:open="isOpen">
-        <CollapsibleTrigger class="flex w-full items-center justify-between p-4 text-start border rounded">
-            <span class="text-sm font-medium">Lihat Detail</span>
-            <ChevronDown class="h-4 w-4 transition-transform duration-200" :class="{ 'rotate-180': isOpen }" />
-        </CollapsibleTrigger>
+    <div class="flex items-center gap-2">
+        <Collapsible v-model:open="isOpen" class="flex-1">
+            <CollapsibleTrigger class="flex w-full items-center justify-between p-4 text-start border rounded">
+                <span class="text-sm font-medium">Lihat Detail</span>
+                <ChevronDown class="h-4 w-4 transition-transform duration-200" :class="{ 'rotate-180': isOpen }" />
+            </CollapsibleTrigger>
 
         <CollapsibleContent>
             <div class="divide-y border rounded">
@@ -78,5 +84,12 @@ const { years, months, days } = calculateAge(props.patient.birth_date);
                 </div>
             </div>
         </CollapsibleContent>
-    </Collapsible>
+        </Collapsible>
+        <LinkButton
+            :href="`${history({ patient: patient.id }).url}?encounter=${encounter?.uuid}`"
+            label="Lihat Riwayat"
+            variant="outline"
+            :icon="History"
+        />
+    </div>
 </template>

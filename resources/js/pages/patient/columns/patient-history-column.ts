@@ -1,3 +1,4 @@
+import { show } from "@/actions/App/Http/Controllers/Resources/EncounterController";
 import LinkButton from "@/components/LinkButton.vue";
 import { Encounter } from "@/types/resources/encounter";
 import { ColumnDef } from "@tanstack/vue-table";
@@ -42,7 +43,9 @@ export const PatientHistoryColumn = (): ColumnDef<Encounter>[] => [
         header: 'Aksi',
         cell: ({ row }) => {
             return h(LinkButton, {
-                href: `/encounters/${row.original.uuid}`,
+                href: show({
+                    encounter: row.original.uuid,
+                }).url,
                 method: 'get',
                 label: 'Lihat',
                 variant: 'outline',

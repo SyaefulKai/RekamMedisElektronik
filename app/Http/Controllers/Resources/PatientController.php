@@ -34,10 +34,11 @@ class PatientController extends Controller
         return to_route('patient.index');
     }
 
-    public function history(Patient $patient)
+    public function history(Patient $patient, \Illuminate\Http\Request $request)
     {
         return Inertia::render('patient/History', [
             'patient' => $patient,
+            'encounter_uuid' => $request->query('encounter'),
             'encounters' => $patient->encounters()
                 ->where('status', 'finished')
                 ->with([

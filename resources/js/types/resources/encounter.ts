@@ -1,5 +1,6 @@
 import { DiagnosisRole, DiagnosisStatus, DiagnosisSystem } from "@/constant/assessment"
 import { ObjectiveSchemaType } from "@/schemas/encounter"
+import { Practitioner } from "@/types/resources/practitioner"
 import { Patient } from "@/types/resources/patient"
 import { Procedure } from "@/types/resources/procedure"
 
@@ -45,6 +46,7 @@ export interface PlanMedication {
     plan_id: number;
     medication_id: number;
     dose?: number | null;
+    dose_per_take?: number | null;
     frequency_per_day?: number | null;
     duration_days?: number | null;
     quantity: number;
@@ -61,6 +63,7 @@ export type Encounter = {
     objective?: ObjectiveSchemaType,
     assessment?: Assessment,
     patient?: Patient,
+    practitioner?: Practitioner,
     plan?: Plan
 }
 

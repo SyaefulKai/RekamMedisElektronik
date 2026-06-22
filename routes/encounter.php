@@ -9,6 +9,7 @@ use App\Http\Controllers\Resources\SubjectiveController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->prefix('encounters')->group(function() {
+    Route::get('/{encounter:uuid}/show', [EncounterController::class, 'show'])->name('encounter.show');
     Route::get('/{encounter:uuid}', [EncounterController::class, 'index'])->name('encounter.index');
     Route::post('/', [EncounterController::class, 'store'])->name('encounter.store');
 

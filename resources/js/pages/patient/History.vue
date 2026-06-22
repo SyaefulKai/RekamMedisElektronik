@@ -8,10 +8,12 @@ import { Encounter } from '@/types/resources/encounter';
 import { Patient } from '@/types/resources/patient';
 import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import { ArrowLeft } from 'lucide-vue-next';
 
 const props = defineProps<{
     patient: Patient;
     encounters: Pagination<Encounter>;
+    encounter_uuid?: string;
 }>();
 
 const patient = computed(() => props.patient);
@@ -37,9 +39,19 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head :title="`Riwayat Rekam Medis - ${patient.name}`" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-col gap-4 p-8">
-            <h1 class="scroll-m-20 text-balance text-4xl font-extrabold tracking-tight">
-                Riwayat Rekam Medis
-            </h1>
+            <div class="flex items-center gap-4">
+                <a
+                    v-if="encounter_uuid"
+                    :href="`/encounters/${encounter_uuid}/show`"
+                    class="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                    <ArrowLeft class="h-4 w-4" />
+                    Kembali ke Encounter
+                </a>
+                <h1 class="scroll-m-20 text-balance text-4xl font-extrabold tracking-tight">
+                    Riwayat Rekam Medis
+                </h1>
+            </div>
 
             <div class="flex flex-col gap-2 rounded-md border p-4 md:flex-row md:items-center md:gap-8">
                 <div class="flex flex-col">

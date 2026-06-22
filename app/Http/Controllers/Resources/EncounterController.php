@@ -15,6 +15,21 @@ use Inertia\Inertia;
 
 class EncounterController extends Controller
 {
+    public function show(Encounter $encounter)
+    {
+        return Inertia::render('encounter/Show', [
+            'encounter' => $encounter->load([
+                'patient',
+                'practitioner.user',
+                'subjective',
+                'objective',
+                'assessment.assessmentDiagnoses',
+                'plan.procedures',
+                'plan.medications.medication',
+            ]),
+        ]);
+    }
+
     public function index(
         Encounter $encounter,
         DiagnosisSearchService $diagnosis_search,
